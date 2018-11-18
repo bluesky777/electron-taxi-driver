@@ -2,18 +2,29 @@ var app = angular.module('TaxisFast');
 
 app.controller('LoginCtrl', function($scope, $http, $filter, ConexionServ, AuthServ, $state, toastr){
 
-ConexionServ.createTables();
+	ConexionServ.createTables();
 
 	$scope.usu = { username: '', password: '' }
 
-  $scope.entrar = function(usu){
+	$scope.entrar = function(user){
 	
-		AuthServ.loguear(usu).then(function(){
-			$state.go('panel');
-			toastr.success('Bienvenido');
-		}, function(err){
-			toastr.error('Datos inválidados');
-		});
+		if (!user.username || user.username.length < 2) {
+			toastr.warning('Nombre de usuario incorrecto');
+		}
+        
+        AuthServ.loguear(user).then(function(data){
+			console.log(data);
+			//toastr.clear()
+			if(data.to_sync){
+				$state.go('panel.nube');
+				toastr.info('Debes descargar los datos si no lo has hecho.', 'Descargar');
+			}else{
+				$state.go('panel');
+			}
+        }, function(){
+            toastr.error('Datos incorrectos');
+        })
+    
 	}
 
 		
@@ -22,18 +33,12 @@ ConexionServ.createTables();
     	consulta = "SELECT * from users ";
    		ConexionServ.query(consulta, []).then(function(result) {
 			if (result.length == 0) {
-
-
-
-
-		consulta = "INSERT INTO users(nombres, apellidos, usuario, password, tipo, sexo) VALUES(?,?,?,?,?,?) ";
+				consulta = "INSERT INTO users(nombres, apellidos, usuario, password, tipo, sexo) VALUES(?,?,?,?,?,?) ";
 				ConexionServ.query(consulta, ['Angel Guillermo', 'Peñarredonda Silva', 'Angelghack',  '123', 'Admin', 'M']).then(function(result) {
 
 				}, function(tx) {
 					console.log("Dato original no insertado", tx);
 				});
-
-		
 
 			}
 
@@ -45,7 +50,7 @@ ConexionServ.createTables();
 
 
     
-	$scope.insertar_datos_iniciales();
+	//$scope.insertar_datos_iniciales();
 	
 	
 

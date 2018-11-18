@@ -11,6 +11,7 @@ angular.module('TaxisFast')
                 "nombres varchar(100)  NOT NULL collate nocase," +
                 "apellidos varchar(100)  DEFAULT NULL collate nocase," +
                 "sexo varchar(1)  NOT NULL," +
+                "email varchar(250)  DEFAULT NULL collate nocase," +
                 "fecha_nac date DEFAULT NULL," +
                 "celular varchar(20) DEFAULT NULL," +
                 "documento varchar(100)  NULL collate nocase,"+

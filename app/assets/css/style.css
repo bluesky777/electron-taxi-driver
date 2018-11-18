@@ -2240,7 +2240,7 @@ header .form-inline {
 /*# sourceMappingURL=style.css.map */
 
 .fondo-seleccionado{
-  background-color: #4682B4;  
+  background-color: #6dbcfe;  
 }
 .manito{
   cursor: pointer;
@@ -2306,4 +2306,12 @@ header .form-inline {
   height: auto;
 }
 
-
+.estado-curso{
+  background-color: #f6ff3d;
+}
+.estado-finalizada{
+  color: #1c6d00;
+}
+.font-16{
+  font-size: 12pt;
+}

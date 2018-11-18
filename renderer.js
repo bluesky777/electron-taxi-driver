@@ -62,7 +62,7 @@ window.fixDate = function(fec, con_hora){
 	  mes = '0' + mes;
 	}
   
-	fecha   = '' + year + '-' + mes  + '-' + dia;
+	fecha   = '' + year + '/' + mes  + '/' + dia;
 	
 	if (con_hora){
 		hora 	= fec.getHours();

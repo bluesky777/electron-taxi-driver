@@ -71,7 +71,7 @@ window.fixDate = function(fec){
 		mes = '0' + mes;
 	}
 
-	fecha 	= '' + year + '-' + mes  + '-' + dia;
+	fecha 	= '' + year + '/' + mes  + '/' + dia;
 
 	return fecha;
 }

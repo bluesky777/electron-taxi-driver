@@ -1,7 +1,7 @@
 var app = angular.module('TaxisFast');
 
-app.controller('CarrerasCtrl', function($scope, $http, $filter, ConexionServ, USER, $location, $anchorScroll, $uibModal){
-console.log(usu);
+app.controller('CarrerasCtrl', function($scope, toastr, $filter, ConexionServ, USER, $location, $anchorScroll, $uibModal){
+
 
 	ConexionServ.createTables();
 
@@ -81,8 +81,16 @@ console.log(usu);
 
 
 	$scope.guardarc = function(carrera_nuevo){
-
-
+		
+		
+		if(!carrera_nuevo.taxi){
+			toastr.warning('Debe elegir taxi');
+			return
+		}
+		taxista_id = null;
+		if(carrera_nuevo.taxista){
+			taxista_id = carrera_nuevo.taxista.rowid;
+		}
 		 
 		fecha_inicio 	= window.fixDate(carrera_nuevo.fecha_ini);
 		fecha_fin 		= window.fixDate(carrera_nuevo.fecha_fin);
@@ -94,10 +102,22 @@ console.log(usu);
 		fechayhora_fin 		= fecha_fin 	+ ' ' + hora_final;
 
 		consulta = 'INSERT INTO carreras (taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, lugar_fin, fecha_fin, estado, registrada_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)'
-		ConexionServ.query(consulta, [carrera_nuevo.taxi.rowid,  carrera_nuevo.taxista.rowid, carrera_nuevo.zona, fechayhora_inicio, carrera_nuevo.lugar_inicio, carrera_nuevo.lugar_fin, fechayhora_fin, carrera_nuevo.estado,usu.rowid]).then(function(result){
-			console.log('se guardo la carrera papi', result);
-					console.log(carrera_nuevo.taxi);
-			$scope.traer_datos()
+		ConexionServ.query(consulta, [carrera_nuevo.taxi.rowid,  taxista_id, carrera_nuevo.zona, fechayhora_inicio, carrera_nuevo.lugar_inicio, carrera_nuevo.lugar_fin, fechayhora_fin, carrera_nuevo.estado, usu.rowid]).then(function(result){
+			toastr.success('Carrera guardada');
+			$scope.traer_datos();
+			
+			fecha = new Date();
+			$scope.carrera_nuevo = {
+				taxi: null,
+				taxista: null,
+				lugar_inicio: '',
+				lugar_fin: '',
+				fecha_ini: fecha,
+				fecha_fin: fecha,
+				hora_ini: fecha,
+				hora_fin: fecha,
+				estado: 'En curso'
+			}
 		}, function(tx){
 			console.log('error', tx);
 		});
@@ -122,20 +142,47 @@ $scope.traer_datos = function(){
 
 */
 
-  $scope.traer_datos = function(){ 
+	$scope.traer_datos = function(dato){
+		
+		consulta 	= '';
+		fechita 	= window.fixDate(new Date());
+		
+		if (dato) {
+			
+			if (dato.select_year && dato.select_year != "0") {
+			
+				fechita 	= dato.select_year;
+				console.log(dato);
+				if (dato.select_month && dato.select_month != "0") {
+					console.log(3456);
+					fechita = fechita + '/' + dato.select_month;
+					
+					if (dato.select_day) {
+						fechita = fechita + '/' + dato.select_day;
+					}
+					//fechita = fechita + '/' + hoy.substring(8, 10);
+				}
 
-	consulta = 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero from carreras c ' + 
-				'INNER JOIN taxistas t ON c.taxista_id = t.rowid ' + 
-				'INNER JOIN taxis tx ON c.taxi_id = tx.rowid WHERE c.eliminado = "0"' +
-				'order by c.rowid desc' ;
-	ConexionServ.query(consulta, []).then(function(result){
+			}else{
+				fechita = '';
+			}
+
+		}
+		
+		consulta 	= 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero from carreras c ' + 
+			'INNER JOIN taxistas t ON c.taxista_id = t.rowid ' + 
+			'INNER JOIN taxis tx ON c.taxi_id = tx.rowid ' + 
+			'WHERE c.eliminado = "0" and fecha_ini like "'+ fechita +'%" ' +
+			'order by c.rowid desc' ;
+			
+
+		
+		ConexionServ.query(consulta).then(function(result){
 		$scope.carreras = result;
 			for (var i = 0; i < $scope.carreras.length; i++) {
 				$scope.carreras[i].fecha_ini = new Date($scope.carreras[i].fecha_ini);
 				$scope.carreras[i].fecha_fin = new Date($scope.carreras[i].fecha_fin);
 			}
-
-			console.log('se trajeron las carreras',result);
 
 		}, function(tx){
 			console.log('error', tx);
@@ -198,8 +245,8 @@ $scope.traer_datos = function(){
 	$scope.guardarcarrera = function(carrera_Editar){
 	
 
-		fecha_inicio = '' + carrera_Editar.fecha_ini.getFullYear() + '-' + (carrera_Editar.fecha_ini.getMonth() + 1 )    + '-' + carrera_Editar.fecha_ini.getDate();
-		fecha_fin = '' + carrera_Editar.fecha_fin.getFullYear() + '-' +  (  carrera_Editar.fecha_ini.getMonth()  +1 ) + '-' + carrera_Editar.fecha_ini.getDate();
+		fecha_inicio = '' + carrera_Editar.fecha_ini.getFullYear() + '/' + (carrera_Editar.fecha_ini.getMonth() + 1 )    + '/' + carrera_Editar.fecha_ini.getDate();
+		fecha_fin = '' + carrera_Editar.fecha_fin.getFullYear() + '/' +  (  carrera_Editar.fecha_ini.getMonth()  +1 ) + '/' + carrera_Editar.fecha_ini.getDate();
 	
 		hora_inicio = '' + carrera_Editar.hora_ini.getHours() + ':' +    carrera_Editar.hora_ini.getMinutes();   //+ (carrera_nuevo.hora_ini.getHours() >= 12 ? "PM" : "AM");
 		hora_final = '' + carrera_Editar.hora_fin.getHours() + ':' +    carrera_Editar.hora_fin.getMinutes();   //+ (carrera_nuevo.hora_fin.getHours() >= 12 ? "PM" : "AM");

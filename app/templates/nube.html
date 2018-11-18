@@ -45,7 +45,7 @@
                                 </tr>
                               </thead >
                               <tbody>
-                                <tr ng-repeat="carrera in carreras" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
+                                <tr ng-repeat="carrera in datos.carreras" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
                                   <th scope="row">{{$index+1}}</th>
                                   <td>
                                     <div uib-tooltip="Id local: {{carrera.rowid}}, Id nube: {{carrera.id}}">{{carrera.rowid}}</div>
@@ -140,7 +140,7 @@
                                 </tr>
                               </thead >
                               <tbody>
-                                <tr ng-repeat="taxista in taxistas">
+                                <tr ng-repeat="taxista in datos.taxistas">
                                   <th scope="row">{{taxista.rowid}}</th>
                                   <td>{{taxista.nombres}}</td>
                                   <td>{{taxista.apellidos}}</td>
@@ -183,7 +183,7 @@
                                 </tr>
                               </thead >
                               <tbody>
-                                <tr ng-repeat="usuario in usuarios">
+                                <tr ng-repeat="usuario in datos.usuarios">
                                   <th scope="row">{{usuario.rowid}}</th>
                                   <td>{{usuario.nombres}}</td>
                                   <td>{{usuario.apellidos}}</td>

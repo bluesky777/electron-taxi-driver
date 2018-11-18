@@ -104,7 +104,7 @@ $scope.traer_datos4 = function(informe){
 
 
 
-fecha_inicios = informe.fecha_ini.getMonth() ;
+	fecha_inicios = informe.fecha_ini.getMonth() ;
 
 
 		consulta = 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero from carreras c ' + 

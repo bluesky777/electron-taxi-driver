@@ -16,7 +16,7 @@ $scope.USER = USER;
 
 
 	$scope.GUARDARUSUARIO = function(usu){
-			fecha_nac = '' + usu.fecha_nac.getFullYear() + '-' + (usu.fecha_nac.getMonth() + 1) + '-' + usu.fecha_nac.getDate();
+			fecha_nac = '' + usu.fecha_nac.getFullYear() + '/' + (usu.fecha_nac.getMonth() + 1) + '/' + usu.fecha_nac.getDate();
 		consulta = 'UPDATE users SET  nombres=?, apellidos=?, sexo=?, documento=?, celular=?, fecha_nac=?, modificado=? where rowid=?'
 		ConexionServ.query(consulta, [usu.nombres,usu.apellidos, usu.sexo, usu.documento, usu.celular,fecha_nac, "1", usu.rowid]).then(function(result){
 			console.log('se cargo el usuario', result);
