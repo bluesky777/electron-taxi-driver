@@ -1,0 +1,128 @@
+
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Bienvenido       {{USER.usuario}} </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+<DIV class="card-body">
+
+	<DIV>
+		PERFIL
+	</DIV>
+
+	 	<div class="content mt-3">
+
+	        <div class="col-sm-12">
+	            
+
+
+
+	    <div class="content mt-3">
+	      <div class="card">
+	        <div class="card-header">
+	            <strong class="card-title">INFORMACION PERSONAL</strong>
+	        </div>
+	    		<div class="card-body ">    
+	          	
+	    		<div class="row">
+	    			<div class="col-sm-4">Nombres</div>
+	    			<input  placeholder="Nombres" class="col-sm-4 form-control" type="text" ng-model="usu.nombres"  name="">
+	    		</div>
+
+	    		<div class="row">
+	    			<div class="col-sm-4">Apellidos</div>
+	    			<input  placeholder="Apellidos" class="col-sm-4 form-control" type="text" ng-model="usu.apellidos"  name="">
+	    		</div>
+	    	  <div class="row">
+                      <div class="col-sm-4">Sexo: </div> 
+                       <input type="radio" name="gender" value="M" ng-model="usu.sexo">Masculino<br>
+                           <input type="radio" name="gender" value="F" ng-model="usu.sexo">Femenino<br>
+                      </div>
+
+	    		<div class="row">
+	    			<div class="col-sm-4">Documento</div>
+	    			<input  placeholder="Documento" class="col-sm-4 form-control" type="text" ng-model="usu.documento"  name="">
+	    		</div>
+
+	    		<div class="row">
+	    			<div class="col-sm-4">Celular</div>
+	    			<input  placeholder="Celular" class="col-sm-4 form-control" type="text" ng-model="usu.celular"  name="">
+	    		</div>
+
+	    		<div class="row">
+	    			<div class="col-sm-4">Fecha nacimiento</div>
+	    			<input  placeholder="Fecha nacimiento" class="col-sm-4 form-control" type="date" ng-model="usu.fecha_nac"  name="">
+	    		</div>
+
+	    		<button ng-click="GUARDARUSUARIO(usu)">SOLICITAR CAMBIOS</button>
+	   			 </div>
+				      
+				  	<div class="row">
+				  	
+				  		
+
+
+				 	 </div>
+	      </div>
+	     </div>    
+
+  
+
+	         <div class="content mt-3">
+	      <div class="card">
+	        <div class="card-header">
+	            <strong class="card-title">CAMBIAR CONTRASEÑA</strong>
+	        </div>
+	    		<div class="card-body">    
+				 <div class="row">
+                     		 <div class="col-sm-7">Contraseña Antigua: </div>
+                        <input  placeholder="Contraseña Antigua" class="col-sm-4 form-control" type="password" ng-model="passwords.antiguo"  name="">
+                      </div>
+                 <div class="row">
+                     		 <div class="col-sm-7">Contraseña Nueva: </div>
+                        <input  placeholder="Contraseña Nueva" class="col-sm-4 form-control" type="password" ng-model="passwords.nuevo"  name="">
+                      </div>
+
+                 <div class="row">
+                     		 <div class="col-sm-7">Repita Contraseña: </div>
+                        <input  placeholder="Repita Contraseña" class="col-sm-4 form-control" type="password" ng-model="passwords.nuevo2"  name="">
+                      </div>
+
+                 <button ng-click="cambiar_pass(passwords)">SOLICITAR CAMBIOS</button>
+                    </div>
+	   			
+				     
+				  
+	      </div>
+	     </div>    
+
+
+
+	             
+
+
+	   
+
+
+
+	            
+
+
+	        </div>
+
+
+	    </div>
+</DIV>

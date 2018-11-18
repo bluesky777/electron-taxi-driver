@@ -1,0 +1,235 @@
+
+
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Bienvenido       {{USER.usuario}} </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+
+        <div class="col-sm-12">
+  
+              <div class="content mt-3"  ng-show="ver2">
+                  <div class="card">
+                      <div class="card-header">
+                          <strong class="card-title">CREAR</strong>
+                      </div>
+                      <div class="card-body">
+                 <form>
+
+                      <div class="row">
+                       <div class="col-sm-2">Nombres: </div>
+                      <input placeholder="Nombres" class="col-sm-4 form-control" type="text" ng-model="usuario_nuevo.nombres">
+                      </div>
+
+                      <div class="row">
+                       <div class="col-sm-2">Apellidos: </div>
+                        <input  placeholder="Apellidos" class="col-sm-4 form-control" type="text"  ng-model="usuario_nuevo.apellidos"  name="">
+                      </div>
+
+
+                    <div class="row">
+                           <div class="col-sm-2">Sexo: </div> 
+                          <div class="col-md-9 col-form-label">
+                            <div name="sa" class="form-check form-check-inline mr-1 " ng-model="usuario_nuevo.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" >
+                              <img src="images/male1.png" class="img-genero" style="width: 100px;" for="inline-masculino-crear">
+                            </div>
+                            <div name="sa" class="form-check form-check-inline mr-1" ng-model="usuario_nuevo.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }"   ng-click="caja_genero2('F')">
+                               <img src="images/female1.png" class="img-genero" style="width: 100px;" for="inline-femenino-crear">
+                             
+                            </div>
+                          </div>
+                        </div>
+
+               
+
+
+
+                        <div class="row">
+                          <div class="col-sm-2">Tipo: </div> 
+                       <input type="radio" name="sa" value="Admin" ng-model="usuario_nuevo.tipo">Administrador<br>
+                           <input type="radio" name="sa" value="Operador" ng-model="usuario_nuevo.tipo">Operador<br>
+                      </div>
+                      <div class="row">
+                      <div class="col-sm-2">Documentos: </div>
+                        <input  placeholder="Documento" class="col-sm-4 form-control" type="text" ng-model="usuario_nuevo.documento"  name="">
+                      </div>
+                      <div class="row">
+                       <div class="col-sm-2">Celular: </div>
+                        <input  placeholder="Celular" class="col-sm-4 form-control" type="text"  ng-model="usuario_nuevo.celular" name="">
+                      </div>
+                      <div class="row">
+                      <div class="col-sm-2">Fecha De Nacimiento: </div>
+                        <input  placeholder="Fecha de Nacimiento" class="col-sm-4 form-control" type="date"  ng-model="usuario_nuevo.fecha_nac" name="">
+                      </div>
+
+                      <div class="row">
+                      <div class="col-sm-2">Usuario: </div>
+                      <input  placeholder="Usuario" class="col-sm-4 form-control" type="text" ng-model="usuario_nuevo.usuario"  name="">
+                      </div>
+
+                      <div class="row">
+                      <div class="col-sm-2">Contraseña: </div>
+                        <input  placeholder="Contraseña" class="col-sm-4 form-control" type="password" ng-model="usuario_nuevo.password"  name="">
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-2">Repita Contraseña: </div>
+                          <input  placeholder="Contraseña" class="col-sm-4 form-control" type="password" ng-model="usuario_nuevo.password2"  name="">
+                      </div>
+                      <br>
+                        <button  class="btn btn-info" ng-click="CREARUSUARIO(usuario_nuevo)" >Guardar</button> <button class="btn" ng-click="cancelar()">Atrás</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+    
+   
+
+
+                <div class="content mt-3">
+
+          <button   class="btn btn-primary" ng-show="ocultarboton" ng-click="mostrartabla()">Crear Usuario</button>
+
+
+
+          
+          <hr>
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Tabla Usuario</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Nombres</th>
+                                  <th scope="col">Apellidos</th>
+                                  <th scope="col">Sexo</th>
+                                     <th scope="col">Tipo</th>
+                                  <th scope="col">Documento</th>
+                                  <th scope="col">Celular</th>
+                                  <th scope="col">Fecha De Nacimiento</th>
+                                  <th scope="col">Usuario</th>
+                                  <TH>Editar/Eliminar</TH>
+                                 
+                                </tr>
+                              </thead >
+                              <tbody>
+                                <tr ng-repeat="usuario in usuarios">
+                                  <th scope="row">{{usuario.rowid}}</th>
+                                  <td>{{usuario.nombres}}</td>
+                                  <td>{{usuario.apellidos}}</td>
+                                  <td>{{usuario.sexo}}</td>
+                                     <td>{{usuario.tipo}}</td>
+                                  <TD>{{usuario.documento}}</TD>
+                                   <TD>{{usuario.celular}}</TD>
+                                  <TD>{{usuario.fecha_nac | date:'dd/MM/yyyy'}}</TD>
+                                  <TD>{{usuario.usuario}}</TD>
+                    
+                                  <TD>
+                                       <button ng-click="editar(usuario)" type="button" class="btn btn-info btn-sm">
+                                            <span class="fa fa-pencil"></span>  
+                                         </button>
+                                      <button type="button"  data-toggle="modal" data-target="#modalConfirmDelete" ng-click="eliminar(usuario)" class="btn btn-danger btn-sm">
+                                          <span class="fa fa-times"></span>  
+                                        </button>
+                                 </TD>
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>     
+
+
+              <div class="content mt-3"  ng-show="ver" id="id-editar-usuario">
+                  <div class="card">
+                      <div class="card-header">
+                          <strong class="card-title">EDITAR</strong>
+                      </div>
+                      <div class="card-body">
+                         <form>
+
+                        <div  class="row">
+                         <div class="col-sm-2">Nombres: </div>
+                        <input placeholder="Nombres" class="col-sm-4 form-control" type="text" ng-model="usuario_Editar.nombres">
+                        </div>
+
+                        <div class="row">
+                         <div class="col-sm-2">Apellidos: </div>
+                          <input  placeholder="Apellidos" class="col-sm-4 form-control" type="text"  ng-model="usuario_Editar.apellidos"  name="">
+                        </div>
+
+
+
+                      
+                    <div class="row">
+                           <div class="col-sm-2">Sexo: </div> 
+                          <div class="col-md-9 col-form-label">
+                            <div name="sa" class="form-check form-check-inline mr-1 " ng-model="usuario_Editar.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" >
+                              <img src="images/male1.png" class="img-genero" style="width: 100px;" for="inline-masculino-crear">
+                            </div>
+                            <div name="sa" class="form-check form-check-inline mr-1" ng-model="usuario_Editar.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }"   ng-click="caja_genero2('F')">
+                               <img src="images/female1.png" class="img-genero" style="width: 100px;" for="inline-femenino-crear">
+                             
+                            </div>
+                          </div>
+                        </div>
+
+
+                      
+                      <div class="row">
+                          <div class="col-sm-2">Tipo: </div> 
+                       <input type="radio" name="sa" value="Admin" ng-model="usuario_Editar.tipo">Administrador<br>
+                           <input type="radio" name="sa" value="Operador" ng-model="usuario_Editar.tipo">Operador<br>
+                      </div>
+                        <div class="row">
+                        <div class="col-sm-2">Documento: </div>
+                          <input  placeholder="Documento" class="col-sm-4 form-control" type="text" ng-model="usuario_Editar.documento"  name="">
+                        </div>
+                        <div class="row">
+                         <div class="col-sm-2">Celular: </div>
+                          <input  placeholder="Celular" class="col-sm-4 form-control" type="text"  ng-model="usuario_Editar.celular" name="">
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-2">Fecha De Nacimiento: </div>
+                          <input class="col-sm-4 form-control" type="date" ng-model="usuario_Editar.fecha_nac" name="">
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-2">Usuario: </div>
+                        <input  placeholder="Usuario" class="col-sm-4 form-control" type="text" ng-model="usuario_Editar.usuario"  name="">
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-2">Contraseña: </div>
+                          <input  placeholder="Contraseña" class="col-sm-4 form-control" type="password" ng-model="usuario_Editar.password"  name="">
+                        </div>
+                 
+                        <br>
+                          <button class="btn btn-info" ng-click="GUARDARUSUARIO(usuario_Editar)" >Editar</button> <button class="btn btn-cancel" ng-click="cancelar()">Atras</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+    
+
+</div>

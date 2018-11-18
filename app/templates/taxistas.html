@@ -1,0 +1,214 @@
+
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Bienvenido       {{USER.usuario}} </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+
+        <div class="col-sm-12">
+            
+
+        <div class="content mt-3"  ng-show="ver2">
+                  <div class="card">
+                      <div class="card-header">
+                          <strong class="card-title">CREAR</strong>
+                      </div>
+                      <div class="card-body">
+           <form ng-submit="CREARTAXISTA(taxista_nuevo)" >
+
+                <div class="row">
+                  <div class="col-sm-2">Nombres: </div>
+                  <input placeholder="Nombres" class="col-sm-4 form-control" type="text" ng-model="taxista_nuevo.nombres">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2">Apellidos: </div>
+                  <input  placeholder="Apellidos" class="col-sm-4 form-control" type="text"  ng-model="taxista_nuevo.apellidos"  name="">
+                </div>
+
+                   <div class="row">
+                           <div class="col-sm-2">Sexo: </div> 
+                          <div class="col-md-9 col-form-label">
+                            <div name="sa" class="form-check form-check-inline mr-1 " ng-model="taxista_nuevo.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" >
+                              <img src="images/male1.png" class="img-genero" style="width: 100px;" for="inline-masculino-crear">
+                            </div>
+                            <div name="sa" class="form-check form-check-inline mr-1" ng-model="taxista_nuevo.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }"   ng-click="caja_genero2('F')">
+                               <img src="images/female1.png" class="img-genero" style="width: 100px;" for="inline-femenino-crear">
+                             
+                            </div>
+                          </div>
+                        </div>
+
+                <div class="row">
+                  <div class="col-sm-2">Documentos: </div>
+                  <input  placeholder="Documento" class="col-sm-4 form-control" type="text" ng-model="taxista_nuevo.documento"  name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2">Celular: </div>
+                  <input  placeholder="Celular" class="col-sm-4 form-control" type="text"  ng-model="taxista_nuevo.celular" name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2">Fecha De Nacimiento: </div>
+                  <input  placeholder="Fecha de Nacimiento" class="col-sm-4 form-control" type="date"  ng-model="taxista_nuevo.fecha_nac" name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2">Usuario: </div>
+                  <input  placeholder="Usuario" class="col-sm-4 form-control" type="text" ng-model="taxista_nuevo.usuario"  name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2">Contraseña: </div>
+                  <input  placeholder="Contraseña" class="col-sm-4 form-control" type="password" ng-model="taxista_nuevo.password"  name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2">Repita contraseña: </div>
+                  <input  placeholder="Repetir Contraseña" class="col-sm-4 form-control" type="password" ng-model="taxista_nuevo.password2"  name="">
+                </div>
+                <br>
+                <button class="btn btn-info" type="submit">Guardar</button> 
+                <button class="btn" type="button" ng-click="cancelar()">Atras</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    
+
+
+
+             
+
+
+                <div class="content mt-3">
+
+          <button   class="btn btn-primary" ng-show="ocultarboton" ng-click="mostrartabla()">Crear Taxista</button>
+
+<hr>
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Tabla Taxistas</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Nombres</th>
+                                  <th scope="col">Apellidos</th>
+                                  <th scope="col">Sexo</th>
+                                  <th scope="col">Documento</th>
+                                  <th scope="col">Celular</th>
+                                  <th scope="col">Fecha De Nacimiento</th>
+                                  <th scope="col">Usuario</th>
+                             
+                                  <TH>Editar/Eliminar</TH>
+                                 
+                                </tr>
+                              </thead >
+                              <tbody>
+                                <tr ng-repeat="taxista in taxistas">
+                                  <th scope="row">{{taxista.rowid}}</th>
+                                  <td>{{taxista.nombres}}</td>
+                                  <td>{{taxista.apellidos}}</td>
+                                  <td>{{taxista.sexo}}</td>
+                                  <TD>{{taxista.documento}}</TD>
+                                   <TD>{{taxista.celular}}</TD>
+                                  <TD>{{taxista.fecha_nac | date:'dd/MM/yyyy'}}</TD>
+                                  <TD>{{taxista.usuario}}</TD>
+                      
+                                  <TD>
+                                       <button ng-click="editar(taxista)" type="button" class="btn btn-info btn-sm">
+                                            <span class="fa fa-pencil"></span>  
+                                         </button>
+                                      <button type="button"  ng-click="eliminar(taxista)" class="btn btn-danger btn-sm">
+                                          <span class="fa fa-times"></span>  
+                                        </button>
+                                 </TD>
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>     
+            <div class="content mt-3"  ng-show="ver" id="id-editar-taxista">
+              <div class="card">
+                <div class="card-header">
+                  <strong class="card-title">EDITAR</strong>
+                </div>
+                <div class="card-body">
+                <form>
+
+                  <div class="row">
+                    <div class="col-sm-2">Nombres: </div>
+                    <input placeholder="Nombres" class="col-sm-4 form-control" type="text" ng-model="taxista_Editar.nombres">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-2">Apellidos: </div>
+                    <input  placeholder="Apellidos" class="col-sm-4 form-control" type="text"  ng-model="taxista_Editar.apellidos"  name="">
+                  </div>
+
+                      <div class="row">
+                           <div class="col-sm-2">Sexo: </div> 
+                          <div class="col-md-9 col-form-label">
+                            <div name="sa" class="form-check form-check-inline mr-1 " ng-model="taxista_Editar.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" >
+                              <img src="images/male1.png" class="img-genero" style="width: 100px;" for="inline-masculino-crear">
+                            </div>
+                            <div name="sa" class="form-check form-check-inline mr-1" ng-model="taxista_Editar.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }"   ng-click="caja_genero2('F')">
+                               <img src="images/female1.png" class="img-genero" style="width: 100px;" for="inline-femenino-crear">
+                             
+                            </div>
+                          </div>
+                        </div>
+                  <div class="row">
+                    <div class="col-sm-2">Documentos: </div>
+                    <input  placeholder="Documentos" class="col-sm-4 form-control" type="text" ng-model="taxista_Editar.documento"  name="">
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-2">Celular: </div>
+                    <input  placeholder="Celular" class="col-sm-4 form-control" type="text"  ng-model="taxista_Editar.celular" name="">
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-2">Fecha De Nacimiento: </div>
+                    <input  placeholder="Fecha De Nacimiento" class="col-sm-4 form-control" type="date"  ng-model="taxista_Editar.fecha_nac" name="">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-2">Usuario: </div>
+                    <input  placeholder="Usuario" class="col-sm-4 form-control" type="text" ng-model="taxista_Editar.usuario"  name="">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-2">Contraseña: </div>
+                    <input  placeholder="Contraseña" class="col-sm-4 form-control" type="password" ng-model="taxista_Editar.password"  name="">
+                  </div>
+
+         
+                  <br>
+                  <button    class="btn btn-info" ng-click="guardartaxista(taxista_Editar)" >Editar</button> <button  class="btn"  ng-click="cancelar()">Atras</button>
+              </form>
+            </div>
+        </div>
+      </div>
+
+</div>

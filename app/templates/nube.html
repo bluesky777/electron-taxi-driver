@@ -1,0 +1,227 @@
+ <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Bienvenido       {{USER.usuario}} </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <div  class="content mt-3">  
+    <BUTTON  ng-click="mostradita()" class="btn btn-primary btn-lg btn-block" > MOSTRAR CAMBIOS REALIZADOS 
+    </BUTTON>
+
+       <hr>
+       <div ng-show="mostrardatos">
+                <div  class="content mt-3">
+                    <div  class="card">
+                        <div class="card-header">
+                            <strong class="card-title">CARRERAS</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Id</th>
+                                    <th scope="col">Taxi</th>
+                                  <th scope="col">Taxista</th>
+                  
+                                  <th scope="col">Lugar Inicio</th>
+                                  <th scope="col">Creado</th>
+                                  <th scope="col">Modifi</th>
+                                  <th scope="col">Elimi</th>
+                       
+                                 
+                                </tr>
+                              </thead >
+                              <tbody>
+                                <tr ng-repeat="carrera in carreras" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
+                                  <th scope="row">{{$index+1}}</th>
+                                  <td>
+                                    <div uib-tooltip="Id local: {{carrera.rowid}}, Id nube: {{carrera.id}}">{{carrera.rowid}}</div>
+                                  </td>
+                                  <td  >{{carrera.numero}}</td>
+                                  <td  >{{carrera.nombres}} {{carrera.apellidos}}</td>
+                                  <TD > {{carrera.lugar_inicio}}</TD>
+                                  <TD>
+                                    <div  class="fa fa-close" ng-show="!carrera.id"></div>
+                                  </TD>
+                                  <TD >
+                                    <div  class="fa fa-close" ng-show="carrera.modificado==1"></div>
+                                  </TD>
+                                    <TD >
+                                    <div class="fa fa-close"  ng-show="carrera.eliminado==1"></div>
+                                  </TD>
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>  
+                
+
+                 <div  class="content mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">TAXI</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  
+                                  <th scope="col">Numero</th>
+                                  <th scope="col">Placa</th>
+                                  <th scope="col">Creado</th>
+                                 <th scope="col">Modifi</th>
+                                  <th scope="col">Elimi</th>
+                            
+                                 
+                                </tr>
+                              </thead >
+                              <tbody>
+                                <tr ng-repeat="taxi in taxis">
+                                  <th scope="row">{{taxi.rowid}}</th>
+                                   
+                                     <td>{{taxi.numero}}</td>
+
+                                  <td>{{taxi.placa}}</td>
+                                       <TD>
+                                    <div  class="fa fa-close" ng-show="!taxi.id"></div>
+                                  </TD>
+                                  <TD >
+                                    <div  class="fa fa-close" ng-show="taxi.modificado==1"></div>
+                                  </TD>
+                                    <TD >
+                                    <div class="fa fa-close"  ng-show="taxi.eliminado==1"></div>
+                                  </TD>
+                           
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                       </div>
+             
+               <div  class="content mt-3">
+                 <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">TAXISTAS</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Nombres</th>
+                                  <th scope="col">Apellidos</th>
+                               
+                                  <th scope="col">Creado</th>
+                                  <th scope="col">Modifi</th>
+                                  <th scope="col">Elimi</th>
+                            
+                           
+                                 
+                                </tr>
+                              </thead >
+                              <tbody>
+                                <tr ng-repeat="taxista in taxistas">
+                                  <th scope="row">{{taxista.rowid}}</th>
+                                  <td>{{taxista.nombres}}</td>
+                                  <td>{{taxista.apellidos}}</td>
+                                  <TD>
+                                    <div class="fa fa-close" ng-show="!taxista.id"></div>
+                                  </TD>
+                                  <TD >
+                                    <div  class="fa fa-close" ng-show="taxista.modificado==1"></div>
+                                  </TD>
+                                    <TD >
+                                    <div  class="fa fa-close" ng-show="taxista.eliminado==1"></div>
+                                  </TD>
+                           
+                                  
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                   </div>
+                   <div  class="content mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">USUARIOS</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Nombres</th>
+                                  <th scope="col">Apellidos</th>
+                                  <th scope="col">Creado</th>
+                                  <th scope="col">Modifi</th>
+                                  <th scope="col">Elimi</th>
+                          
+                                
+                                </tr>
+                              </thead >
+                              <tbody>
+                                <tr ng-repeat="usuario in usuarios">
+                                  <th scope="row">{{usuario.rowid}}</th>
+                                  <td>{{usuario.nombres}}</td>
+                                  <td>{{usuario.apellidos}}</td>
+                             
+                                      <TD>
+                                    <div class="fa fa-close" ng-show="!usuario.id"></div>
+                                  </TD>
+                                  <TD >
+                                    <div class="fa fa-close" ng-show="usuario.modificado==1"></div>
+                                  </TD>
+                                    <TD >
+                                    <div class="fa fa-close" ng-show="usuario.eliminado==1"></div>
+                                  </TD>
+                           
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <BUTTON ng-show="boton_cerrar" ng-click="mostradita()" class="btn btn-danger btn-lg btn-block" > CERRAR
+    </BUTTON>
+              </div>
+<hr>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+
+  <BUtton class="btn btn-info btn-lg" ng-click="descargar_datos()">Descargar Datos</button>
+    <button type="button" ng-click="basededatos()" class="btn btn-primary btn-lg">Subir Datos</button>
+   <button type="button" ng-click="eliminar_todo()" class="btn btn-danger btn-lg">Eliminar Datos</button>
+
+</div>
+ <hr>
+ <hr>
+  <div style="height: 20px" class="progress" ng-show="BARRA_CREA">
+    <div class="progress-bar" role="progressbar" style="width: {{progreso_barra}}%;" aria-valuenow="{{progreso_barra}}" aria-valuemin="0" aria-valuemax="100">{{progreso_barra}}%</div>
+  </div>
+ 
+</div>

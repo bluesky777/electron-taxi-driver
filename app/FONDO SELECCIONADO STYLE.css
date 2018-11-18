@@ -1,0 +1,10 @@
+
+.fondo-seleccionado{
+  background-color: #4682B4;  
+}
+.manito{
+  cursor: pointer;
+}
+.btn-estado:disabled {
+    background: #b7b7b7;
+}

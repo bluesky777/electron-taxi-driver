@@ -1,0 +1,344 @@
+
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Bienvenido       {{USER.usuario}} </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+
+        <div class="col-sm-12">
+           
+
+
+    <div class="content mt-3"  ng-show="ver2">
+      <div class="card">
+        <div class="card-header">
+            <strong class="card-title">CREAR</strong>
+        </div>
+    <div class="card-body">    
+        
+           <form  ng-submit="guardarc(carrera_nuevo)" >
+          
+              
+                     <div class="row">
+                          <div class="col-sm-3">Taxi: </div>
+
+                          <div class="col-sm-4">
+
+                            <ui-select ng-model="carrera_nuevo.taxi" on-select="select_taxista(carrera_nuevo)" style="width: 100%;" theme="bootstrap">
+                              <ui-select-match placeholder="Taxi">
+                                <span ng-bind="$select.selected.rowid + ' (' + $select.selected.numero + ')'"></span>
+                              </ui-select-match>
+                              <ui-select-choices repeat="item in  taxis |  filter: $select.search track by $index">
+                                <span ng-bind-html="item.rowid + ' (' + item.numero + ')' | highlight: $select.search"></span>
+                              </ui-select-choices>
+                            </ui-select>
+                            
+                          </div>
+                        </div>
+
+                  <div class="row">
+                          <div class="col-sm-3">Taxista:</div>
+
+
+                          <div class="col-sm-4">
+
+                            <ui-select ng-model="carrera_nuevo.taxista"   " style="width: 100%;" theme="bootstrap">
+                              <ui-select-match placeholder="Taxista">
+                                <span ng-bind="$select.selected.nombres + ' ' + $select.selected.apellidos "></span>
+                              </ui-select-match>
+                              <ui-select-choices repeat="item in  taxistas |  filter: $select.search track by $index">
+                                <span ng-bind-html="item.nombres + ' ' + item.apellidos  | highlight: $select.search"></span>
+                              </ui-select-choices>
+                            </ui-select>
+                            
+                          </div>
+
+
+                        
+                      </div>
+                  <div class="row" style="padding-top: 10px;  padding-bottom: 10px">
+                      <div class="col-sm-3">Zona de parqueo: </div>
+                        <div class="col-sm-4">
+                          <div class="btn-group">
+                              <label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z1'">Z1</label>
+                              <label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z2'">Z2</label>
+                              <label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z3'">Z3</label>
+                          
+                        </div>
+                    </div>
+                  </div>
+
+                <div class="row">
+                  <div class="col-sm-3">Fecha Inicio: </div>
+                    <input  placeholder="Fecha Inicio" class="col-sm-4 form-control" type="date" ng-model="carrera_nuevo.fecha_ini"  name="">
+                  </div>
+                
+                    <div class="row">
+                  <div class="col-sm-3" style="padding-top: 30px;">Hora Inicio: </div>
+                  <div uib-timepicker ng-model="carrera_nuevo.hora_ini"" ng-change="1" hour-step="1" minute-step="1" show-meridian="true"></div>
+
+                 
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">Lugar Inicio: </div>
+                  <input  placeholder="Lugar Inicio" class="col-sm-4 form-control" type="text" ng-model="carrera_nuevo.lugar_inicio"  name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">Lugar Fin: </div>
+                  <input  placeholder="Lugar Fin" class="col-sm-4 form-control" type="text"  ng-model="carrera_nuevo.lugar_fin" name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">Fecha Fin: </div>
+                  <input  placeholder="Fecha Fin" class="col-sm-4 form-control" type="date"  ng-model="carrera_nuevo.fecha_fin" name="">
+                </div>
+
+             <div class="row">
+                  <div class="col-sm-3" style="padding-top: 30px;">Hora Fin: </div>
+                   <div uib-timepicker ng-model="carrera_nuevo.hora_fin"" ng-change="1" hour-step="1" minute-step="1" show-meridian="true"></div>
+                </div>
+
+                <div class="row sin-negrillas">
+                  <div class="col-sm-3">Estado: </div>
+                 <div class="col-sm-3" >    
+                    <label>
+                      <input class=""  type="radio" name="gender" value="En curso" ng-model="carrera_nuevo.estado">En curso<br>
+                    </label>
+                  </div>
+
+                  <div class=" col-sm-3" > 
+                    <label>
+                      <input class=""  type="radio" name="gender" value="Finalizada" ng-model="carrera_nuevo.estado">Finalizada<br>
+                    </label>
+                  </div>
+                  <div class=" col-sm-3" > 
+                    <label>
+                      <input   class=""  type="radio" name="gender" value="Cancelada" ng-model="carrera_nuevo.estado">Cancelada<br>
+                    </label>
+                  </div>
+                </div>
+
+            
+ 
+                <button  class="btn btn-info btn-block"  type="submit">Guardar</button> 
+               
+            </form>
+          </div>
+          
+        </div>
+      </div>    
+
+
+
+      <div  class=" content mt-3">
+        <div  style="height: 150px; background-color: white;   text-align: center " class="card">
+           <div class="card-header">
+            <strong style="text-align: left" class="card-title">ESTADO</strong>
+        </div>
+            <div style=" text-align: center" >
+                  <BUTTON class="btn btn-primary btn-estado "  ng-click="en_curso(carrera_estado)" style="margin-top: 27px; padding: 10px " ng-disabled="carrera_estado.estado=='En curso'">EN CURSO</BUTTON>
+
+                  <BUTTON class=   "  btn-estado btn btn-primary " ng-click="finalizada(carrera_estado)"   ng-disabled="carrera_estado.estado=='Finalizada'" style="margin-top: 27px; padding: 10px " >FINALIZADA</BUTTON>
+
+                  <BUTTON class="    btn-estado btn btn-primary "  ng-click="cancelada(carrera_estado)"  ng-disabled="carrera_estado.estado=='Cancelada'" style="margin-top: 27px; padding: 10px " >CANCELADA</BUTTON>
+
+            </div>
+        </div>
+      </div>
+        
+
+             
+
+
+                <div class="content mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">CARRERAS</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Taxi</th>
+                                  <th scope="col">Taxista</th>
+                                  <th scope="col">Zona de parqueo</th>
+                                  <th scope="col">Fecha De Inicio</th>
+                                  <th scope="col">Lugar Inicio</th>
+                                  <th scope="col">Lugar Fin</th>
+                                  <th scope="col">Fecha Fin</th>
+                                  <th scope="col">Estado</th>
+                                  <TH>Editar/Eliminar</TH>
+                                 
+                                </tr>
+                              </thead >
+                              <tbody>
+                                <tr ng-repeat="carrera in carreras" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
+                                  <th scope="row">{{carrera.rowid}}</th>
+                                  <td  ng-click="modificarcarrera(carrera)">{{carrera.numero}}</td>
+                                  <td  ng-click="modificarcarrera(carrera)">{{carrera.nombres}} {{carrera.apellidos}}</td>
+                                  <td  ng-click="modificarcarrera(carrera)">{{carrera.zona}}</td>         
+                                  <td  ng-click="modificarcarrera(carrera)">{{carrera.fecha_ini | date:'yyyy-MM-dd HH:mm' }}</td>
+                                  <TD ng-click="modificarcarrera(carrera)"> {{carrera.lugar_inicio}}</TD>
+                                   <TD  ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</TD>
+                                  <TD  ng-click="modificarcarrera(carrera)">{{carrera.fecha_fin | date:'yyyy-MM-dd HH:mm'}}</TD>
+                                  <TD ng-click="modificarcarrera(carrera)">{{carrera.estado}}</TD>
+                             
+                                  <TD>
+                                       <button ng-click="editar(carrera)" type="button" class="btn btn-info btn-sm">
+                                            <span class="fa fa-pencil"></span>  
+                                         </button>
+                                      <button type="button"  ng-click="eliminar(carrera)" class="btn btn-danger btn-sm">
+                                          <span class="fa fa-times"></span>  
+                                        </button>
+                                 </TD>
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>     
+        <div class="content mt-3"  ng-show="ver" id="id-editar-carrera">
+              <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">EDITAR</strong>
+                </div>
+            <div class="card-body">
+                <form>
+                  <H1>MODIFICAR</H1>
+                <div>
+
+                    <div class="row">
+                          <div class="col-sm-3">Taxi: </div>
+
+                          <div class="col-sm-4">
+
+                            <ui-select ng-model="carrera_Editar.taxi" style="width: 100%;" theme="bootstrap">
+                              <ui-select-match placeholder="Taxi">
+                                <span ng-bind="$select.selected.rowid + ' (' + $select.selected.numero + ')'"></span>
+                              </ui-select-match>
+                              <ui-select-choices repeat="item in  taxis |  filter: $select.search track by $index">
+                                <span ng-bind-html="item.rowid + ' (' + item.numero + ')' | highlight: $select.search"></span>
+                              </ui-select-choices>
+                            </ui-select>
+                            
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-3">Taxista:</div>
+
+
+                          <div class="col-sm-4">
+
+                            <ui-select ng-model="carrera_Editar.taxista" style="width: 100%;" theme="bootstrap">
+                              <ui-select-match placeholder="Taxista">
+                                <span ng-bind="$select.selected.nombres + ' ' + $select.selected.apellidos "></span>
+                              </ui-select-match>
+                              <ui-select-choices repeat="item in  taxistas |  filter: $select.search track by $index">
+                                <span ng-bind-html="item.nombres + ' ' + item.apellidos  | highlight: $select.search"></span>
+                              </ui-select-choices>
+                            </ui-select>
+                            
+                          </div>
+
+
+                        
+                      </div>
+                        <div class="row" style="padding-top: 10px;  padding-bottom: 10px">
+                      <div class="col-sm-3">Zona de parqueo: </div>
+                        <div class="col-sm-4">
+                          <div class="btn-group">
+                              <label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z1'">Z1</label>
+                              <label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z2'">Z2</label>
+                              <label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z3'">Z3</label>
+                          
+                        </div>
+                    </div>
+                  </div>
+
+
+                <div class="row">
+                  <div class="col-sm-3">Fecha Inicio: </div>
+                  <input  placeholder="Fecha Inicio" class="col-sm-4 form-control" type="date" ng-model="carrera_Editar.fecha_ini"  name="">
+                </div>
+                    <div class="row">
+                  <div class="col-sm-3" style="padding-top: 30px;">Hora Inicio: </div>
+                  <div uib-timepicker ng-model="carrera_Editar.hora_ini"" ng-change="1" hour-step="1" minute-step="1" show-meridian="true"></div>
+
+                 
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">Lugar Inicio: </div>
+                  <input  placeholder="Lugar Inicio" class="col-sm-4 form-control" type="text" ng-model="carrera_Editar.lugar_inicio"  name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">Lugar Fin: </div>
+                  <input  placeholder="Lugar Fin" class="col-sm-4 form-control" type="text"  ng-model="carrera_Editar.lugar_fin" name="">
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">Fecha Fin: </div>
+                  <input  placeholder="Fecha Fin" class="col-sm-4 form-control" type="date"  ng-model="carrera_Editar.fecha_fin" name="">
+                </div>
+
+
+             <div class="row">
+                  <div class="col-sm-3" style="padding-top: 30px;">Hora Fin: </div>
+                   <div uib-timepicker ng-model="carrera_Editar.hora_fin"" ng-change="1" hour-step="1" minute-step="1" show-meridian="true"></div>
+                </div>
+
+                 <div class="row">
+                  <div class="col-sm-2">Estado: </div>
+                 <div class="col-sm-3" >     
+                    <input class=""  type="radio" name="gender" value="En curso" ng-model="carrera_Editar.estado">En curso<br>
+                  </div>
+                  <div class=" col-sm-3" > 
+                    <label>
+                      <input class=""  type="radio" name="gender" value="Finalizada" ng-model="carrera_Editar.estado">Finalizada
+                    </label>
+                  </div>
+                  <div class=" col-sm-3" > 
+
+                    <input   class=""  type="radio" name="gender" value="Cancelada" ng-model="carrera_Editar.estado">Cancelada<br>
+                  </div>
+                </div>
+            
+                  <button   class="btn btn-info" ng-click="guardarcarrera(carrera_Editar)" >MODIFICAR</button> <button  class="btn" ng-click="cancelar()">ATRAS</button>
+              </form>
+            </div>
+          </div>
+        </div> 
+    
+
+
+
+            
+
+
+        </div>
+
+
+    </div>
+

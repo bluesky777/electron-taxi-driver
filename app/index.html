@@ -1,0 +1,112 @@
+<!doctype html >
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+
+<html lang="es" ng-app="TaxisFast">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Radio Taxi</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGzVJP7YXsBYgfXThZZ-uhxlSIS8u7nik"
+    async defer></script>
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.original.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+
+    <link href='assets/js/angular-ui-select/dist/select.min.css' rel='stylesheet'>
+    <link href='assets/js/angular-bootstrap/ui-bootstrap-csp.css' rel='stylesheet'>
+    <link href="assets/js/select2/select2.css" rel="stylesheet">
+    <link href="assets/js/angular-ui-grid/ui-grid.min.css" rel="stylesheet">
+    <link href="assets/js/angular-toastr/angular-toastr.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/lib/vector-map/jqvmap.min.css">
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+</head>
+<body ng-controller="ApplicationCtrl" ng-class="{'open': colapsado=='true'}">
+
+
+    <div ui-view>
+        
+    </div>
+
+    
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCLbd6K7FHwsg5238vwhtpI-JmvG_ODfZA",
+        authDomain: "taxy-100.firebaseapp.com",
+        databaseURL: "https://taxy-100.firebaseio.com",
+        projectId: "taxy-100",
+        storageBucket: "taxy-100.appspot.com",
+        messagingSenderId: "585201415939"
+    };
+    firebase.initializeApp(config);
+    </script>
+    
+    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/widgets.js"></script>
+
+    <script type="text/javascript" src="assets/js/angular.min.js"></script>
+    <script type="text/javascript" src="assets/js/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="assets/js/angularfire.min.js"></script>
+    <script type="text/javascript" src="assets/js/angular-touch/angular-touch.js"></script>
+    <script type="text/javascript" src="assets/js/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="assets/js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="assets/js/angular-ui-select/dist/select.js"></script>
+    <script type="text/javascript" src="assets/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="assets/js/angular-ui-grid/ui-grid.min.js"></script>
+    <script type="text/javascript" src="assets/js/angular-toastr/angular-toastr.tpls.js"></script>
+    
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/AuthServ.js"></script>
+    <script type="text/javascript" src="assets/js/ConexionServ.js"></script>
+    <script type="text/javascript" src="assets/js/PanelCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/TaxistasCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/UsuariosCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/taxisCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/CarrerasCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/LoginCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/perfilCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/InformesCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/GPSCtrl.js"></script>
+    <script type="text/javascript" src="assets/js/nube.js"></script>
+    
+    <script type="text/javascript" src="assets/js/usuario_modalctrl.js"></script>
+
+    <script type="text/javascript" src="assets/js/taxista_modalctrl.js"></script>
+
+    <script type="text/javascript" src="assets/js/taxi_modalctrl.js"></script>
+
+    <script type="text/javascript" src="assets/js/carrera_modalctrl.js"></script>
+
+    <script type="text/javascript" src="assets/js/nube_modalctrl.js"></script>
+
+
+
+
+</body>
+</html>

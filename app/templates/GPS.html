@@ -1,0 +1,55 @@
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Bienvenido  {{USER.usuario}} </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        
+    
+
+    <div class="content mt-3">
+
+        <div class="col-sm-12">
+          
+
+                     <div class="row">
+                          <div class="col-sm-1">Taxi: </div>
+
+                          <div class="col-sm-4">
+
+                            <ui-select ng-model="data.taxi_selec" style="width: 100%;" theme="bootstrap">
+                              <ui-select-match placeholder="Taxi">
+                                <span ng-bind="$select.selected.rowid + ' (' + $select.selected.numero + ')'"></span>
+                              </ui-select-match>
+                              <ui-select-choices repeat="item in  taxis |  filter: $select.search track by $index">
+                                <span ng-bind-html="item.rowid + ' (' + item.numero + ')' | highlight: $select.search"></span>
+                              </ui-select-choices>
+                            </ui-select>
+                            
+                          </div>
+                          <button ng-click="ubicacion()" class="col-sm-4 btn btn-info">Mostrar Ubicacion</button>
+                          <hr>
+                        </div>  
+<hr>
+
+                  
+        </div>
+        <div>
+          <div  class="col-sm-12" id="map" style="height:400px">MAPA</div>
+        </div>
+    
+</div>
