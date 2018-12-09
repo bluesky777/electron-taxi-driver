@@ -143,24 +143,27 @@ $scope.traer_datos()
 
 
  
-  $scope.editar = function(taxista){
+	$scope.editar = function(taxista){
    
-   	$scope.ver = true;
-   taxista.fecha_nac = new Date(taxista.fecha_nac);
-   $scope.taxista_Editar = taxista;
+		$scope.ver = true;
+		if (taxista.fecha_nac) {
+			taxista.fecha_nac = new Date(taxista.fecha_nac);
+		}
+		
+		$scope.taxista_Editar = taxista;
    		$location.hash('id-editar-taxista');
 		$anchorScroll();
 	
-  }
+	}
     
-  $scope.cancelar = function(){
+	$scope.cancelar = function(){
    
-	$scope.ver2 = false;
-   	$scope.ver = false;
-   	$location.hash('');
-   	
- 		$scope.ocultarboton = !$scope.ocultarboton;
-  }
+		$scope.ver2 = false;
+		$scope.ver = false;
+		$location.hash('');
+		
+		$scope.ocultarboton = !$scope.ocultarboton;
+	}
     
 	$scope.guardartaxista = function(taxista_Editar){
 

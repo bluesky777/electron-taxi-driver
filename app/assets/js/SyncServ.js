@@ -72,67 +72,68 @@ angular.module('TaxisFast')
             $http.put(rutaServidor.ruta + 'taxis/subir-datos', datos).then(function(r){
 
                 consulta = 'DELETE FROM taxis Where id is null'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el taxi en la compu', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
                 consulta = 'DELETE FROM users Where id is null'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el usuario', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
                 consulta = 'DELETE FROM taxistas Where id is null'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el taxista en la compu', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
 
                 consulta = 'DELETE FROM carreras Where id is null'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el carrera en la compu', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
 
                 consulta = 'UPDATE taxistas SET eliminado ="0", modificado="0"'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el taxistas en la nube', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
                 consulta = 'UPDATE taxis SET eliminado ="0", modificado="0"'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el SET en la nube', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
                 consulta = 'UPDATE carreras SET eliminado ="0", modificado="0"'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el carreras en la nube', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
                 consulta = 'UPDATE users SET eliminado ="0", modificado="0"'
-                ConexionServ.query(consulta, []).then(function(result){
+                prom = ConexionServ.query(consulta, []).then(function(result){
                     console.log('se elimino el users en la nube', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
 
-            
+                promesas = [];
                 taxis = r.data.taxis;
                 for (var i = 0; i < taxis.length; i++) {
                     taxi = taxis[i];
                     
                     consulta = 'INSERT INTO taxis ( id, rowid, modelo, numero, placa, taxista_id, propietario, soat, seguro) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-                    ConexionServ.query(consulta, [taxi.id, taxi.id, taxi.modelo, taxi.numero, taxi.placa, taxi.taxista_id, taxi.propietario, taxi.soat, taxi.seguro]).then(function(result){
+                    prom = ConexionServ.query(consulta, [taxi.id, taxi.id, taxi.modelo, taxi.numero, taxi.placa, taxi.taxista_id, taxi.propietario, taxi.soat, taxi.seguro]).then(function(result){
                         console.log('se cargo taxis', result);
                     }, function(tx){
                         console.log('error', tx);
                     });
+                    promesas.push(prom);
                 } 
 
                 taxistas = r.data.taxistas;
@@ -141,11 +142,12 @@ angular.module('TaxisFast')
 
                     taxista =  taxistas[i];
                     consulta = 'INSERT INTO taxistas (id, rowid, nombres, apellidos, sexo, documento, celular, usuario, password, fecha_nac) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-                    ConexionServ.query(consulta, [taxista.id, taxista.id, taxista.nombres, taxista.apellidos, taxista.sexo, taxista.documento, taxista.celular, taxista.usuario, taxista.password, taxista.fecha_nac]).then(function(result){
+                    prom = ConexionServ.query(consulta, [taxista.id, taxista.id, taxista.nombres, taxista.apellidos, taxista.sexo, taxista.documento, taxista.celular, taxista.usuario, taxista.password, taxista.fecha_nac]).then(function(result){
                         console.log('se cargo el taxista', result);
                     }, function(tx){
                         console.log('error', tx);
                     });
+                    promesas.push(prom);
                 } 
 
                 carreras = r.data.carreras;
@@ -155,11 +157,12 @@ angular.module('TaxisFast')
                     carrera =  carreras[i];
                 
                     consulta = 'INSERT INTO carreras (id, rowid, taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, lugar_fin, fecha_fin, estado, registrada_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-                    ConexionServ.query(consulta, [carrera.id, carrera.id, carrera.taxi_id, carrera.taxista_id, carrera.zona, carrera.fecha_ini, carrera.lugar_ini, carrera.lugar_fin, carrera.fecha_fin, carrera.estado, carrera.registrada_por]).then(function(result){
+                    prom = ConexionServ.query(consulta, [carrera.id, carrera.id, carrera.taxi_id, carrera.taxista_id, carrera.zona, carrera.fecha_ini, carrera.lugar_ini, carrera.lugar_fin, carrera.fecha_fin, carrera.estado, carrera.registrada_por]).then(function(result){
                         console.log('se guardo la carrera papi', result);
                     }, function(tx){
                         console.log('error', tx);
                     });
+                    promesas.push(prom);
                 }
                 
                 /*

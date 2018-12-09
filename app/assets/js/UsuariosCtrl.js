@@ -153,7 +153,11 @@ app.controller('UsuariosCtrl', function($scope, $http, $filter, ConexionServ, $l
 	$scope.editar = function(usuario){
    
 		$scope.ver = true;
-		usuario.fecha_nac = new Date(usuario.fecha_nac);
+		
+		if (usuario.fecha_nac) {
+			usuario.fecha_nac = new Date(usuario.fecha_nac);
+		}
+		
 		$scope.usuario_Editar = usuario;
 		$location.hash('id-editar-usuario');
 		$anchorScroll();

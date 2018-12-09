@@ -135,7 +135,8 @@ app.controller('nubeCtrl', function($scope, $http, $filter, ConexionServ, toastr
 
 		
 		SyncServ.sincronizarCambios($scope.datos).then(function(){
-
+			
+			toastr.success('Datos subidos');
 			
 			SyncServ.traerCambios().then(function(datos){
 				$scope.datos 	= datos;
