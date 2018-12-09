@@ -156,23 +156,7 @@
                             <input  placeholder="Fecha Inicio" class="col-sm-4 form-control" type="date" ng-model="informe.fecha_ini"  name="">
                           <button class="btn btn-primary" ng-click="traer_datos4(informe)">Traer Carreras</button>
                           </div>
-                          <div class="row">
-                          <div  class="col-sm-3">Por Año</div>
-                          <select   placeholder="Meses" >
-                            <option ng-click="mostrarmes()">2017</option >
-                            <option ng-click="mostrarmes()">2018</option >
-                            <option ng-click="mostrarmes()">2019</option >
-                            <option ng-click="mostrarmes()">2020</option >
-                            <option ng-click="mostrarmes()">2021</option >
-                            <option ng-click="mostrarmes()">2022</option >
-                            <option ng-click="mostrarmes()">2023</option >
-                            <option ng-click="mostrarmes()">2024</option >
-                            <option ng-click="mostrarmes()">2025</option >
-                            <option ng-click="mostrarmes()">2026</option >
-                
-                           </select>
-                            
-                        </div>
+                          
                         <div ng-show="mesesito" class="row">
                           <div  class="col-sm-3">Por mes</div>
                           <select   placeholder="Meses" ng-model="informe.fecha_ini" >

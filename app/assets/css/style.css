@@ -2271,7 +2271,32 @@ header .form-inline {
         background-color: white;
         padding: 0;
     }
+    .tb-carreras{
+      font-size: 9pt;
+      margin-top: 5px;
+    }
+    .tb-carreras tbody tr td{
+      padding-top: 0px;
+      padding-bottom: 0px;
+      border: 1px solid #666;
+    }
+    .tb-carreras thead tr th{
+      padding-top: 0px;
+      padding-bottom: 0px;
+      border: 1px solid #666;
+    }
+    .card-header{
+      padding: 0px;
+    }
+    .card-header .card-title{
+      margin: 0px;
+    }
+    .card-body{
+      padding: 0px;
+    }
 }
+
+
 .tb-informe td, .tb-informe th{
     padding: 0 !important;
      border: 1px #000 solid !important;

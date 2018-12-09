@@ -1,4 +1,4 @@
-<div class="breadcrumbs">
+<div class="breadcrumbs no-print">
 	<div class="col-sm-4">
 		<div class="page-header float-left">
 			<div class="page-title">
@@ -22,7 +22,7 @@
 
 
 
-		<div class="content mt-3" ng-show="ver2">
+		<div class="content mt-3 no-print" ng-show="ver2">
 			<div class="card">
 				<div class="card-header">
 					<strong class="card-title">CREAR</strong>
@@ -149,7 +149,7 @@
 
 
 
-		<div class=" content mt-3">
+		<div class=" content mt-3 no-print">
 			<div style="height: 150px; background-color: white;   text-align: center " class="card">
 				<div class="card-header">
 					<strong style="text-align: left" class="card-title">ESTADO</strong>
@@ -174,12 +174,20 @@
 
 		<div class="content mt-3">
 			<div class="card">
-				<div class="card-header">
+				<div class="card-header" style="text-align: center;">
 					<strong class="card-title">CARRERAS</strong>
 				</div>
 				<div class="card-body" style="min-height: 500px;">
 					
-					<div style="margin-bottom: 20px">
+					<button ng-click="imprimir()" class="btn btn-success btn-lg no-print">
+						<i class="glyphicon glyphicon-print"></i>
+						Imprimir</button>
+						
+					<br class="no-print">
+					<br class="no-print">
+					  
+							
+					<div style="margin-bottom: 20px" class="no-print">
 						<label for="">Traer datos de</label>
 						
 						<select name="select_year" ng-model="dato.select_year" ng-change="traer_datos(dato)">
@@ -195,7 +203,7 @@
 							<option value="01">Enero</option>
 							<option value="02">Febrero</option>
 							<option value="03">Marzo</option>
-							<option value="04">Abrir</option>
+							<option value="04">Abril</option>
 							<option value="05">Mayo</option>
 							<option value="06">Junio</option>
 							<option value="07">Julio</option>
@@ -211,7 +219,7 @@
 					
 					
 					
-					<table class="table">
+					<table class="table tb-carreras">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">#</th>
@@ -223,33 +231,33 @@
 								<th scope="col">Lugar Fin</th>
 								<th scope="col">Fecha Fin</th>
 								<th scope="col">Estado</th>
-								<TH>Editar</TH>
+								<TH class="no-print">Editar</TH>
 
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="carrera in carreras" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
-								<th scope="row">{{carrera.rowid}}</th>
+								<td scope="row">{{carrera.rowid}}</td>
 								<td ng-click="modificarcarrera(carrera)">{{carrera.numero}}</td>
 								<td ng-click="modificarcarrera(carrera)">{{carrera.nombres}} {{carrera.apellidos}}</td>
 								<td ng-click="modificarcarrera(carrera)">{{carrera.zona}}</td>
 								<td ng-click="modificarcarrera(carrera)">{{carrera.fecha_ini | date:'yyyy-MM-dd HH:mm' }}</td>
-								<TD ng-click="modificarcarrera(carrera)"> {{carrera.lugar_inicio}}</TD>
-								<TD ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</TD>
-								<TD ng-click="modificarcarrera(carrera)">{{carrera.fecha_fin | date:'yyyy-MM-dd HH:mm'}}</TD>
-								<TD ng-click="modificarcarrera(carrera)" 
+								<td ng-click="modificarcarrera(carrera)"> {{carrera.lugar_inicio}}</td>
+								<td ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</td>
+								<td ng-click="modificarcarrera(carrera)">{{carrera.fecha_fin | date:'yyyy-MM-dd HH:mm'}}</td>
+								<td ng-click="modificarcarrera(carrera)" 
 									ng-class="{'estado-curso': carrera.estado=='En curso', 'estado-finalizada': carrera.estado=='Finalizada'}">
 									{{carrera.estado}}
-								</TD>
+								</td>
 
-								<TD>
+								<td class="no-print">
 									<button ng-click="editar(carrera)" type="button" class="btn btn-info">
 										<span class="fa fa-pencil"></span>
 									</button>
 									<button type="button" ng-click="eliminar(carrera)" class="btn btn-danger">
 										<span class="fa fa-times"></span>
 									</button>
-								</TD>
+								</td>
 							</tr>
 
 						</tbody>

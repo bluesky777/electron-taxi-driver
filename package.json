@@ -1,6 +1,6 @@
 {
   "name": "radio-taxi",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Aplicación para control de los Taxis en RadioTaxi",
   "main": "main.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "publish": "build --mac --win -p always",
     "postinstall": "install-app-deps"
   },
-  "repository": "https://github.com/MADAMEMO/PROYECTO-DE-GRADO-MEMO-Y-MARCOS.git",
+  "repository": "https://github.com/bluesky777/electron-taxi-driver.git",
   "keywords": [
     "Radio",
     "Taxi",

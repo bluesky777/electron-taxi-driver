@@ -17,6 +17,15 @@ app.controller('CarrerasCtrl', function($scope, toastr, $filter, ConexionServ, U
 		hora_fin: fecha,
 		estado: 'En curso'
 	};
+	
+	
+	$scope.imprimir = function() {
+		
+		const {ipcRenderer} = require('electron');
+		console.log(ipcRenderer);
+		window.print();
+	};
+
 
 
 	$scope.carrera_Editar = {
