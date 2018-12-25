@@ -1815,7 +1815,7 @@ header .form-inline {
                 div[class*="col"] {
                     padding: 0;
                 }
-                .table td, .table th {
+                .table:not(.uib-timepicker) td, .table th {
                     padding: 5px;
                 }
             }

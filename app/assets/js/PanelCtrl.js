@@ -7,32 +7,10 @@ app.controller('ApplicationCtrl', function($scope, AuthServ, $state){
 	
 });
  
-app.controller('PanelCtrl', function($scope, AuthServ, $state, USER, $firebaseArray){
+app.controller('PanelCtrl', function($scope, AuthServ, $state, USER){
  
 	$scope.USER = USER;
-
-	var url = 'https://taxy-100.firebaseio.com/taxistas';
-	var fireRef = firebase.database().ref();
 	
-	var taxiNew = {
-			nombres: 'JOSETH',
-			apellidos: 'GUERRERO',
-			documento: 123
-		};
-		
-	var newPostKey = firebase.database().ref().child('taxistas').push().key;
-	
-	console.log(newPostKey);
-	// Bind the todos to the firebase provider.
-	//$scope.todos = $firebaseArray(fireRef);
-	
-	/*
-	$scope.todos.$add({
-		nombres: 'JOSETH',
-		apellidos: 'GUERRERO',
-		documento: 123
-	});
-	*/
 	
 	
 	if (localStorage.calapsado) {

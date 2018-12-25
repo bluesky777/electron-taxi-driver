@@ -15,8 +15,7 @@ angular.module('TaxisFast', [
 	'ui.grid.pinning',
 	'ui.grid.expandable',
 	'ui.grid.moveColumns',
-	'toastr',
-	'firebase'
+	'toastr'
 ])
 
 

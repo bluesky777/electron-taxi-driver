@@ -814,7 +814,8 @@ textarea {
   outline: 0 !important; }
 
 .no-padding {
-  padding: 0 !important; }
+  padding: 0 !important; 
+}
 
 /* Global Styles */
 /* Main Styles */
@@ -2336,7 +2337,22 @@ header .form-inline {
 }
 .estado-finalizada{
   color: #1c6d00;
+  font-weight: bold;
 }
 .font-16{
   font-size: 12pt;
+}
+.bold{
+  font-weight: bold;
+}
+
+.uib-timepicker td {
+  padding: 0;
+  vertical-align: unset;
+  border-top: 0;
+}
+@media screen {
+  .card-body{
+    overflow: auto;
+  }
 }

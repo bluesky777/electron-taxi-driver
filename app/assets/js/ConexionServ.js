@@ -43,7 +43,7 @@ angular.module('TaxisFast')
                 "propietario varchar(100)  DEFAULT NULL collate nocase," +
                 "Soat varchar(100)  DEFAULT NULL collate nocase," +
                 "Seguro varchar(100)  DEFAULT NULL collate nocase,"+
-                   "modificado integer DEFAULT 0,"+
+                "modificado integer DEFAULT 0,"+
                 "eliminado integer  DEFAULT 0)";
 
   sqlcarreras = "CREATE TABLE IF NOT EXISTS carreras (id integer," +
@@ -52,11 +52,12 @@ angular.module('TaxisFast')
                 "zona varchar(100)  NOT NULL collate nocase,"+
                 "fecha_ini date DEFAULT NULL," +
                 "lugar_inicio varchar(100) DEFAULT NULL,"+
-                 "lugar_fin varchar(100) DEFAULT NULL,"+
+                "cell_llamado varchar(100) DEFAULT NULL,"+ // Número al que llamaron a pedir el servicio
+                "lugar_fin varchar(100) DEFAULT NULL,"+
                 "fecha_fin date DEFAULT NULL," +
                 "estado varchar(100) NOT NULL collate nocase,"+
                 "registrada_por integer(100) DEFAULT NULL collate nocase,"+
-                 "modificado varchar(100)  DEFAULT 0,"+
+                "modificado varchar(100)  DEFAULT 0,"+
                 "eliminado integer  DEFAULT 0)";
               
     result = {

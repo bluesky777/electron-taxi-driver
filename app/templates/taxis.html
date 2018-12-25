@@ -1,187 +1,263 @@
+<div class="breadcrumbs">
+  <div class="col-sm-4">
+    <div class="page-header float-left"><div class="page-title"></div></div>
+  </div>
+  <div class="col-sm-8">
+    <div class="page-header float-right">
+      <div class="page-title">
+        <ol class="breadcrumb text-right">
+          <li class="active">Bienvenido {{ USER.usuario }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="content mt-3">
+  <div class="col-sm-12">
+    <div class="content mt-3" ng-show="ver_crear">
+      <div class="card">
+        <div class="card-header"><strong class="card-title">CREAR</strong></div>
+        <div class="card-body">
+          
+          <form ng-submit="CREARTAXI(taxi_nuevo)">
+            <div class="row">
+              <div class="col-sm-2">Modelo:</div>
+              <input
+                placeholder="Modelo"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_nuevo.modelo"
+              />
+            </div>
 
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
+            <div class="row">
+              <div class="col-sm-2">Numero:</div>
+              <input
+                placeholder="Numero"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_nuevo.numero"
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2">Placa:</div>
+              <input
+                placeholder="Placa"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_nuevo.placa"
+                name=""
+              />
+            </div>
+            <div class="row">
+              <div class="col-sm-2">Propietario:</div>
+              <input
+                placeholder="Placa"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_nuevo.propietario"
+                name=""
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2">Conductor:</div>
+              <div class="col-sm-4 no-padding">
+                  <ui-select ng-model="taxi_nuevo.taxista" style="width: 100%;" theme="bootstrap">
+                    <ui-select-match placeholder="Conductor">
+                      <span ng-bind="$select.selected.nombres + ' ' + $select.selected.apellidos"></span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in taxistas |  filter: $select.search track by $index">
+                      <span ng-bind-html="item.nombres + ' ' + item.apellidos | highlight: $select.search"></span>
+                    </ui-select-choices>
+                  </ui-select>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active">Bienvenido       {{USER.usuario}} </li>
-                    </ol>
-                </div>
+            
+            <div class="row">
+              <div class="col-sm-2">Soat:</div>
+              <input
+                placeholder="Soat"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_nuevo.Soat"
+                name=""
+              />
             </div>
+
+            <div class="row">
+              <div class="col-sm-2">Seguro:</div>
+              <input
+                placeholder="Seguro"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_nuevo.Seguro"
+                name=""
+              />
+            </div>
+
+            <br />
+            <button class="btn btn-info btn-lg" type="submit">Guardar</button>
+            <button class="btn btn-default btn-lg" type="button" ng-click="cancelar()">
+              Cancelar
+            </button>
+          </form>
         </div>
+      </div>
     </div>
 
     <div class="content mt-3">
+      <button class="btn btn-primary btn-lg" ng-show="!ver_crear" ng-click="mostrartabla()">
+        CREAR TAXI
+      </button>
+      
+      <hr />
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">TABLA TAXI</strong>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Numero</th>
+                <th scope="col">Placa</th>
+                <th scope="col">Propietario</th>
+                <th scope="col">Conductor</th>
+                <th scope="col">Soat</th>
+                <th scope="col">Seguro</th>
+                <TH>Editar/Eliminar</TH>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="taxi in taxis">
+                <th scope="row">{{ taxi.rowid }}</th>
+                <td>{{ taxi.modelo }}</td>
+                <td>{{ taxi.numero }}</td>
 
-        <div class="col-sm-12">
-            
+                <td>{{ taxi.placa }}</td>
+                <td>{{ taxi.propietario }}</td>
+                <td>{{ taxi.nombres }} {{ taxi.apellidos }}</td>
+                <td>{{ taxi.Soat }}</td>
+                <TD>{{ taxi.Seguro }}</TD>
+                <TD>
+                  <button
+                    ng-click="editar(taxi)"
+                    type="button"
+                    class="btn btn-info"
+                  >
+                    <span class="fa fa-pencil"></span>
+                  </button>
+                  <button
+                    type="button"
+                    ng-click="eliminar(taxi)"
+                    class="btn btn-danger"
+                  >
+                    <span class="fa fa-times"></span>
+                  </button>
+                </TD>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-              <div class="content mt-3"  ng-show="ver2">
-                <div class="card">
-                  <div class="card-header">
-                    <strong class="card-title">CREAR</strong>
-                  </div>
-                  <div class="card-body">
-                   <form ng-submit="CREARTAXI(taxi_nuevo)" >
-                                                        
-                        <div class="row">
-                          <div class="col-sm-2">Modelo: </div>
-                          <input placeholder="Modelo" class="col-sm-4 form-control" type="text" ng-model="taxi_nuevo.modelos">
-                        </div>
-
-                             <div class="row">
-                          <div class="col-sm-2">Numero: </div>
-                          <input placeholder="Numero" class="col-sm-4 form-control" type="text" ng-model="taxi_nuevo.numero">
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-2">Placa: </div>
-                          <input  placeholder="Placa" class="col-sm-4 form-control" type="text"  ng-model="taxi_nuevo.placas"  name="">
-                        </div>
-                         <div class="row">
-                          <div class="col-sm-2">Propietario: </div>
-                          <input  placeholder="Placa" class="col-sm-4 form-control" type="text"  ng-model="taxi_nuevo.propietario"  name="">
-                        </div>
-
-
-                        <div class="row">
-                          <div class="col-sm-2">Conductor: </div>
-                          <select placeholder="Conductor" class="col-sm-4 form-control" type="text" ng-model="taxi_nuevo.taxista_id"  name="">
-                            <option value="{{taxista.rowid}}" ng-repeat="taxista in taxistas">{{taxista.nombres}}   {{taxista.apellidos}}</option>
-                          </select>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-2">Soat: </div>
-                          <input  placeholder="Soat" class="col-sm-4 form-control" type="text" ng-model="taxi_nuevo.Soat"  name="">
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-2">Seguro: </div>
-                          <input  placeholder="Seguro" class="col-sm-4 form-control" type="text"  ng-model="taxi_nuevo.Seguro" name="">
-                        </div>
-
-                        <br>
-                        <button class="btn btn-info" type="submit">Guardar</button> 
-                        <button class="btn btn-info" type="button" ng-click="cancelar()">Atras</button>
-                    </form>
-                </div>
+    <div class="content mt-3" ng-show="ver_editar" id="id-editar-taxi">
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">EDITAR</strong>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-sm-2">Modelo:</div>
+              <input
+                placeholder="Modelo"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_Editar.modelos"
+              />
             </div>
+
+            <div class="row">
+              <div class="col-sm-2">Numero:</div>
+              <input
+                placeholder="Numero"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_Editar.numero"
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2">Placa:</div>
+              <input
+                placeholder="Placa"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_Editar.placa"
+                name=""
+              />
+            </div>
+            <div class="row">
+              <div class="col-sm-2">Propietario:</div>
+              <input
+                placeholder="Propietario"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_Editar.propietario"
+                name=""
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2">Conductor:</div>
+              
+              <div class="col-sm-4 no-padding">
+								<ui-select ng-model="taxi_Editar.taxista" style="width: 100%;" theme="bootstrap">
+                  <ui-select-match placeholder="Conductor">
+                    <span ng-bind="$select.selected.nombres + ' ' + $select.selected.apellidos"></span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="item in  taxistas |  filter: $select.search track by $index">
+                    <span ng-bind-html="item.nombres + ' ' + item.apellidos | highlight: $select.search"></span>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div class="col-sm-2">Soat:</div>
+              <input
+                placeholder="Soat"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_Editar.Soat"
+                name=""
+              />
+            </div>
+            <div class="row">
+              <div class="col-sm-2">Seguro:</div>
+              <input
+                placeholder="Seguro"
+                class="col-sm-4 form-control"
+                type="text"
+                ng-model="taxi_Editar.Seguro"
+                name=""
+              />
+            </div>
+            <br />
+            <button class="btn btn-info btn-lg" ng-click="guardartaxi(taxi_Editar)">
+              Guardar cambios
+            </button>
+            <button class="btn btn-default btn-lg" ng-click="cancelar()">Cancelar</button>
+          </form>
         </div>
-    
-
-
-        
-
-
-             
-
-
-                <div class="content mt-3">
-                    <button   class="btn btn-primary"  ng-show="ocultarboton" ng-click="mostrartabla()">CREAR TAXI</button>
-                    <hr>
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">TABLA TAXI</strong>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                              <thead class="thead-dark">
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Modelo</th>
-                                  <th scope="col">Numero</th>
-                                  <th scope="col">Placa</th>
-                                 <th scope="col">Propietario</th>
-                                  <th scope="col">Conductor</th>
-                                  <th scope="col">Soat</th>
-                                  <th scope="col">Seguro</th>
-                                  <TH>Editar/Eliminar</TH>
-                                 
-                                </tr>
-                              </thead >
-                              <tbody>
-                                <tr ng-repeat="taxi in taxis">
-                                  <th scope="row">{{taxi.rowid}}</th>
-                                   <td>{{taxi.modelo}}</td>
-                                     <td>{{taxi.numero}}</td>
-
-                                  <td>{{taxi.placa}}</td>
-                                    <td>{{taxi.propietario}}</td>
-                                  <td>{{taxi.nombres}} {{taxi.apellidos}} </td>
-                                  <td>{{taxi.Soat}}</td>
-                                  <TD>{{taxi.Seguro}}</TD>
-                                  <TD>
-                                       <button ng-click="editar(taxi)" type="button" class="btn btn-info btn-sm">
-                                            <span class="fa fa-pencil"></span>  
-                                         </button>
-                                      <button type="button"  ng-click="eliminar(taxi)" class="btn btn-danger btn-sm">
-                                          <span class="fa fa-times"></span>  
-                                        </button>
-                                 </TD>
-                                </tr>
-                               
-                              </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>     
-            <div class="content mt-3"  ng-show="ver" id="id-editar-taxi">
-              <div class="card">
-                <div class="card-header">
-                  <strong class="card-title">EDITAR</strong>
-                </div>
-                <div class="card-body">
-                <form>
-
-                  <div class="row">
-                    <div class="col-sm-2">Modelo: </div>
-                    <input placeholder="Modelo" class="col-sm-4 form-control" type="text" ng-model="taxi_Editar.modelos">
-                  </div>
-
-                     <div class="row">
-                    <div class="col-sm-2">Numero: </div>
-                    <input placeholder="Numero" class="col-sm-4 form-control" type="text" ng-model="taxi_Editar.numero">
-                  </div>
-
-                  <div class="row">
-                    <div class="col-sm-2">Placa: </div>
-                    <input  placeholder="Placa" class="col-sm-4 form-control" type="text"  ng-model="taxi_Editar.placas"  name="">
-                  </div>
-                   <div class="row">
-                          <div class="col-sm-2">Propietario: </div>
-                          <input  placeholder="Placa" class="col-sm-4 form-control" type="text"  ng-model="taxi_Editar.propietario"  name="">
-                        </div>
-
-                <div class="row">
-                    <div class="col-sm-2">Conductor: </div>
-                    <select placeholder="Conductor" class="col-sm-4 form-control" type="text" ng-model="taxi_Editar.taxista_id"  name="">
-                      <option value="{{taxista.rowid}}" ng-repeat="taxista in taxistas">{{taxista.nombres}}   {{taxista.apellidos}}</option>
-                    </select>
-                </div>
-                  <div class="row">
-                    <div class="col-sm-2">Soat: </div>
-                    <input  placeholder="Soat" class="col-sm-4 form-control" type="text" ng-model="taxi_Editar.Soat"  name="">
-                  </div>
-                  <div  class="row">
-                    <div class="col-sm-2">Seguro: </div>
-                    <input  placeholder="Seguro" class="col-sm-4 form-control" type="text"  ng-model="taxi_Editar.Seguro" name="">
-                  </div>
-                  <br>
-                  <button class="btn btn-info"  ng-click="guardartaxi(taxi_Editar)" >Editar</button> 
-                  <button class="btn " ng-click="cancelar()">Atras</button>
-              </form>
-          </div>
-        </div>
-     </div>
-
-    </DIV>
-    
+      </div>
+    </div>
+  </div>
 </div>

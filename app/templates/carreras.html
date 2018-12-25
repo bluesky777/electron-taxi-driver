@@ -16,13 +16,13 @@
 	</div>
 </div>
 
-<div class="content mt-3">
+<div class="content row mt-3">
 
 	<div class="col-sm-12">
 
 
 
-		<div class="content mt-3 no-print" ng-show="ver2">
+		<div class="content no-print">
 			<div class="card">
 				<div class="card-header">
 					<strong class="card-title">CREAR</strong>
@@ -32,15 +32,35 @@
 					<form ng-submit="guardarc(carrera_nuevo)">
 
 						<div class="row">
-							<div class="col-sm-3">Lugar Inicio: </div>
-							<input placeholder="Lugar Inicio" class="col-sm-4 form-control font-16" type="text" ng-model="carrera_nuevo.lugar_inicio"
-							 name="">
+							<div class="col-sm-3">Dirección: </div>
+							<input placeholder="Lugar Inicio" class="col-sm-8 form-control font-16" type="text" ng-model="carrera_nuevo.lugar_inicio"
+								uib-typeahead="direccion.direccion for direccion in direcciones | filter:$viewValue | limitTo:8">
+						</div>
+						
+						<div class="row mt-3">
+							<div class="col-sm-3" uib-tooltip="Celular al que llamaron pidiendo el servicio">Celular llamado: </div>
+
+							<div class="col-sm-7 no-padding" >
+								<div class="btn-group">
+									<label class="btn btn-success" ng-model="carrera_nuevo.cell_llamado" uib-btn-radio="'{{cell.cell_llamado}}'"
+										ng-repeat="cell in celulares">{{cell.cell_llamado}}</label>
+									
+									<button class="btn btn-primary" type="button" uib-tooltip="Otro número" ng-click="mostrar_mas_cell()" ng-show="!mostrando_mas_cell">
+										<i class="fa fa-plus"></i>
+									</button>
+
+								</div>
+							</div>
+							
+							<input placeholder="Celular llamado" ng-show="mostrando_mas_cell" class="col-sm-2 form-control font-16" type="text" ng-model="carrera_nuevo.cell_llamado"
+								style="font-size: 10pt;">
+							
 						</div>
 
-						<div class="row">
+						<div class="row mt-3">
 							<div class="col-sm-3">Taxi: </div>
 
-							<div class="col-sm-4">
+							<div class="col-sm-4 no-padding">
 
 								<ui-select ng-model="carrera_nuevo.taxi" on-select="select_taxista(carrera_nuevo)" style="width: 100%;" theme="bootstrap">
 									<ui-select-match placeholder="Taxi">
@@ -58,7 +78,7 @@
 							<div class="col-sm-3">Taxista:</div>
 
 
-							<div class="col-sm-4">
+							<div class="col-sm-4 no-padding">
 
 								<ui-select ng-model="carrera_nuevo.taxista" " style=" width: 100%;" theme="bootstrap">
 									<ui-select-match placeholder="Taxista">
@@ -81,65 +101,65 @@
 									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z1'">Z1</label>
 									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z2'">Z2</label>
 									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z3'">Z3</label>
+									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Otro'">Otro</label>
 
 								</div>
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-sm-3">Fecha Inicio: </div>
-							<input placeholder="Fecha Inicio" class="col-sm-4 form-control font-16" type="date" ng-model="carrera_nuevo.fecha_ini"
-							 name="">
-						</div>
-
-						<div class="row">
-							<div class="col-sm-3" style="padding-top: 30px;">Hora Inicio: </div>
+							<div class="col-sm-3" style="margin-top: 30px">Fecha llamada: </div>
+							
+							<input placeholder="Fecha llamada" class="col-sm-4 form-control font-16" type="date" ng-model="carrera_nuevo.fecha_ini"
+								style="margin-top: 28px">
+							 
 							<div uib-timepicker ng-model="carrera_nuevo.hora_ini"" ng-change=" 1" hour-step="1" minute-step="1"
-							 show-meridian="true"></div>
+							 show-meridian="true" style="margin-left: 10px"></div>
 
 
 						</div>
 
-
+						<!--
 						<div class="row">
 							<div class="col-sm-3">Lugar Fin: </div>
 							<input placeholder="Lugar Fin" class="col-sm-4 form-control font-16" type="text" ng-model="carrera_nuevo.lugar_fin" name="">
 						</div>
+						-->
 
 						<div class="row">
-							<div class="col-sm-3">Fecha Fin: </div>
-							<input placeholder="Fecha Fin" class="col-sm-4 form-control font-16" type="date" ng-model="carrera_nuevo.fecha_fin" name="">
-						</div>
-
-						<div class="row">
-							<div class="col-sm-3" style="padding-top: 30px;">Hora Fin: </div>
+							<div class="col-sm-3" style="margin-top: 30px">Fecha encuentro: </div>
+							<input placeholder="Fecha Fin" class="col-sm-4 form-control font-16" type="date" ng-model="carrera_nuevo.fecha_fin"
+								style="margin-top: 28px">
+						
 							<div uib-timepicker ng-model="carrera_nuevo.hora_fin" ng-change=" 1" hour-step="1" minute-step="1"
-							 show-meridian="true"></div>
+								show-meridian="true" style="margin-left: 10px"></div>
 						</div>
 
-						<div class="row sin-negrillas">
+						<div class="row">
 							<div class="col-sm-3">Estado: </div>
 							<div class="col-sm-3">
 								<label>
-									<input class="" type="radio" name="gender" value="En curso" ng-model="carrera_nuevo.estado">En curso<br>
+									<input class="" type="radio" name="gender" value="En curso" ng-model="carrera_nuevo.estado"> En curso<br>
 								</label>
 							</div>
 
 							<div class=" col-sm-3">
 								<label>
-									<input class="" type="radio" name="gender" value="Finalizada" ng-model="carrera_nuevo.estado">Finalizada<br>
+									<input class="" type="radio" name="gender" value="Finalizada" ng-model="carrera_nuevo.estado"> Finalizada<br>
 								</label>
 							</div>
 							<div class=" col-sm-3">
 								<label>
-									<input class="" type="radio" name="gender" value="Cancelada" ng-model="carrera_nuevo.estado">Cancelada<br>
+									<input class="" type="radio" name="gender" value="Cancelada" ng-model="carrera_nuevo.estado"> Cancelada<br>
 								</label>
 							</div>
 						</div>
 
 
 
-						<button class="btn btn-info btn-block" style="font-size: 13pt;" type="submit">Guardar</button>
+						<button class="btn btn-info btn-block mt-4" style="font-size: 13pt;" type="submit">
+							<i class="fa fa-save"></i>
+							Guardar</button>
 
 					</form>
 				</div>
@@ -217,34 +237,54 @@
 						<input type="button" class="btn btn-info" value="Buscar" ng-click="traer_datos(dato)">
 					</div>
 					
+					<div>
+						<input type="text" ng-model="buscando" placeholder="Buscar..." class="form-control col-sm-6" style="margin-bottom: 20px; font-size: 14px;">
+					</div>
 					
-					
-					<table class="table tb-carreras">
+					<table class="table tb-carreras table-condensed">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Taxi</th>
 								<th scope="col">Taxista</th>
 								<th scope="col">Zona</th>
-								<th scope="col">Fecha Inicio</th>
-								<th scope="col">Lugar Inicio</th>
-								<th scope="col">Lugar Fin</th>
-								<th scope="col">Fecha Fin</th>
+								<th scope="col">Llamada</th>
+								<th scope="col">Dirección</th>
+								<!--<th scope="col">Lugar Fin</th>-->
+								<th scope="col">Encuentro</th>
 								<th scope="col">Estado</th>
 								<TH class="no-print">Editar</TH>
 
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="carrera in carreras" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
+							<tr ng-repeat="carrera in carreras | filter:buscando" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
 								<td scope="row">{{carrera.rowid}}</td>
 								<td ng-click="modificarcarrera(carrera)">{{carrera.numero}}</td>
 								<td ng-click="modificarcarrera(carrera)">{{carrera.nombres}} {{carrera.apellidos}}</td>
 								<td ng-click="modificarcarrera(carrera)">{{carrera.zona}}</td>
-								<td ng-click="modificarcarrera(carrera)">{{carrera.fecha_ini | date:'yyyy-MM-dd HH:mm' }}</td>
+								<td ng-click="modificarcarrera(carrera)">{{carrera.fecha_ini | date:'yyyy-MM-dd hh:mm a' }}</td>
 								<td ng-click="modificarcarrera(carrera)"> {{carrera.lugar_inicio}}</td>
-								<td ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</td>
-								<td ng-click="modificarcarrera(carrera)">{{carrera.fecha_fin | date:'yyyy-MM-dd HH:mm'}}</td>
+								<!--<td ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</td>-->
+								<td ng-click="modificarcarrera(carrera, true)">
+									<span ng-show="!carrera.cambiando_hora"> 
+										{{carrera.fecha_fin | date:'yyyy-MM-dd hh:mm a'}}
+									</span>
+										
+									<div ng-show="carrera.cambiando_hora" style="background-color: #a3fc8a; padding: 4px;"> 
+										<div uib-timepicker ng-model="carrera.fecha_fin" ng-change="1" hour-step="1" minute-step="1"
+											show-meridian="true" style="margin-left: 10px"></div>
+										
+										<button ng-click="guardar_hora_fin(carrera)" type="button" class="btn btn-primary" uib-tooltip="Guardar hora">
+											<i class="fa fa-save"></i>
+											Guardar
+										</button>
+										<button type="button" ng-click="cancelar_fecha_fin(carrera)" class="btn btn-warning" uib-tooltip="Cancelar">
+											<i class="fa fa-undo"></i>
+											Cancelar
+										</button>
+									</div>
+								</td>
 								<td ng-click="modificarcarrera(carrera)" 
 									ng-class="{'estado-curso': carrera.estado=='En curso', 'estado-finalizada': carrera.estado=='Finalizada'}">
 									{{carrera.estado}}
@@ -266,22 +306,47 @@
 				</div>
 			</div>
 		</div>
-		<div class="content mt-3" ng-show="ver" id="id-editar-carrera">
+		<div class="content mt-3" ng-show="ver" id="id-editar-carrera" style="margin-bottom: 50px">
 			<div class="card">
 				<div class="card-header">
-					<strong class="card-title">EDITAR</strong>
+					<strong class="card-title">MODIFICAR</strong>
 				</div>
 				<div class="card-body">
 					<form>
-						<H1>MODIFICAR</H1>
 						<div>
 
 							<div class="row">
+								<div class="col-sm-3">Dirección: </div>
+								<input placeholder="Lugar Inicio" class="col-sm-8 form-control font-16" type="text" ng-model="carrera_Editar.lugar_inicio"
+									uib-typeahead="direccion.direccion for direccion in direcciones | filter:$viewValue | limitTo:8">
+							</div>
+							
+							<div class="row mt-3">
+								<div class="col-sm-3" uib-tooltip="Celular al que llamaron pidiendo el servicio">Celular llamado: </div>
+	
+								<div class="col-sm-7 no-padding" >
+									<div class="btn-group">
+										<label class="btn btn-success" ng-model="carrera_Editar.cell_llamado" uib-btn-radio="'{{cell.cell_llamado}}'"
+											ng-repeat="cell in celulares">{{cell.cell_llamado}}</label>
+										
+										<button class="btn btn-primary" type="button" uib-tooltip="Otro número" ng-click="mostrar_mas_cell()" ng-show="!mostrando_mas_cell">
+											<i class="fa fa-plus"></i>
+										</button>
+	
+									</div>
+								</div>
+								
+								<input placeholder="Celular llamado" ng-show="mostrando_mas_cell" class="col-sm-2 form-control font-16" type="text" ng-model="carrera_Editar.cell_llamado"
+									style="font-size: 10pt;">
+								
+							</div>
+							
+							<div class="row mt-3">
 								<div class="col-sm-3">Taxi: </div>
 
-								<div class="col-sm-4">
+								<div class="col-sm-4 no-padding">
 
-									<ui-select ng-model="carrera_Editar.taxi" style="width: 100%;" theme="bootstrap">
+									<ui-select ng-model="carrera_Editar.taxi" on-select="select_taxista(carrera_Editar)" style="width: 100%;" theme="bootstrap">
 										<ui-select-match placeholder="Taxi">
 											<span ng-bind="$select.selected.rowid + ' (' + $select.selected.numero + ')'"></span>
 										</ui-select-match>
@@ -297,7 +362,7 @@
 								<div class="col-sm-3">Taxista:</div>
 
 
-								<div class="col-sm-4">
+								<div class="col-sm-4 no-padding">
 
 									<ui-select ng-model="carrera_Editar.taxista" style="width: 100%;" theme="bootstrap">
 										<ui-select-match placeholder="Taxista">
@@ -320,6 +385,7 @@
 										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z1'">Z1</label>
 										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z2'">Z2</label>
 										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z3'">Z3</label>
+										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Otro'">Otro</label>
 
 									</div>
 								</div>
@@ -327,61 +393,55 @@
 
 
 							<div class="row">
-								<div class="col-sm-3">Fecha Inicio: </div>
-								<input placeholder="Fecha Inicio" class="col-sm-4 form-control" type="date" ng-model="carrera_Editar.fecha_ini"
-								 name="">
-							</div>
-							<div class="row">
-								<div class="col-sm-3" style="padding-top: 30px;">Hora Inicio: </div>
-								<div uib-timepicker ng-model="carrera_Editar.hora_ini"" ng-change=" 1" hour-step="1" minute-step="1"
-								 show-meridian="true"></div>
+								<div class="col-sm-3" style="margin-top: 30px">Fecha llamada: </div>
+								<input placeholder="Fecha llamada" class="col-sm-4 form-control font-16" type="date" ng-model="carrera_Editar.fecha_ini"
+									style="margin-top: 27px">
+								<div uib-timepicker ng-model="carrera_Editar.fecha_ini"" ng-change=" 1" hour-step="1" minute-step="1"
+									show-meridian="true" style="margin-left: 10px"></div>
 
 
 							</div>
 
-							<div class="row">
-								<div class="col-sm-3">Lugar Inicio: </div>
-								<input placeholder="Lugar Inicio" class="col-sm-4 form-control" type="text" ng-model="carrera_Editar.lugar_inicio"
-								 name="">
-							</div>
-
+							
+							<!--
 							<div class="row">
 								<div class="col-sm-3">Lugar Fin: </div>
 								<input placeholder="Lugar Fin" class="col-sm-4 form-control" type="text" ng-model="carrera_Editar.lugar_fin"
 								 name="">
 							</div>
+							-->
 
 							<div class="row">
-								<div class="col-sm-3">Fecha Fin: </div>
-								<input placeholder="Fecha Fin" class="col-sm-4 form-control" type="date" ng-model="carrera_Editar.fecha_fin"
-								 name="">
-							</div>
-
-
-							<div class="row">
-								<div class="col-sm-3" style="padding-top: 30px;">Hora Fin: </div>
-								<div uib-timepicker ng-model="carrera_Editar.hora_fin"" ng-change=" 1" hour-step="1" minute-step="1"
-								 show-meridian="true"></div>
+								<div class="col-sm-3" style="margin-top: 30px">Fecha Fin: </div>
+								<input placeholder="Fecha Fin" class="col-sm-4 form-control font-16" type="date" ng-model="carrera_Editar.fecha_fin"
+									style="margin-top: 27px">
+								<div uib-timepicker ng-model="carrera_Editar.fecha_fin" ng-change="1" hour-step="1" minute-step="1"
+								 show-meridian="true" style="margin-left: 10px"></div>
 							</div>
 
 							<div class="row">
 								<div class="col-sm-2">Estado: </div>
 								<div class="col-sm-3">
-									<input class="" type="radio" name="gender" value="En curso" ng-model="carrera_Editar.estado">En curso<br>
-								</div>
-								<div class=" col-sm-3">
 									<label>
-										<input class="" type="radio" name="gender" value="Finalizada" ng-model="carrera_Editar.estado">Finalizada
+										<input class="" type="radio" name="gender" value="En curso" ng-model="carrera_Editar.estado"> En curso
 									</label>
 								</div>
 								<div class=" col-sm-3">
-
-									<input class="" type="radio" name="gender" value="Cancelada" ng-model="carrera_Editar.estado">Cancelada<br>
+									<label>
+										<input class="" type="radio" name="gender" value="Finalizada" ng-model="carrera_Editar.estado"> Finalizada
+									</label>
+								</div>
+								<div class=" col-sm-3">
+									<label>
+										<input class="" type="radio" name="gender" value="Cancelada" ng-model="carrera_Editar.estado"> Cancelada
+									</label>
 								</div>
 							</div>
 
-							<button class="btn btn-info" ng-click="guardarcarrera(carrera_Editar)">MODIFICAR</button> <button class="btn"
-							 ng-click="cancelar()">ATRAS</button>
+							<button class="btn btn-info" ng-click="guardarcarrera(carrera_Editar)">
+								<i class="fa fa-save"></i>
+								Guardar cambios</button> 
+							<button class="btn btn-default" ng-click="cancelar()">Cancelar</button>
 					</form>
 				</div>
 			</div>
