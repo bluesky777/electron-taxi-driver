@@ -124,7 +124,7 @@ app.controller("CarrerasCtrl", function(
 			carrera_nuevo.lugar_fin,
 			fechayhora_fin,
 			carrera_nuevo.estado,
-			usu.rowid
+			usu.nombres + ' ' + usu.apellidos
 		]).then(function(result) {
 				toastr.success("Carrera guardada");
 				$scope.traer_datos();
@@ -172,10 +172,9 @@ app.controller("CarrerasCtrl", function(
 			}
 		}
 
-		consulta = "SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero, u.nombres as nombres_reg, u.apellidos as apellidos_reg from carreras c " +
+		consulta = "SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero from carreras c " +
 			"INNER JOIN taxistas t ON c.taxista_id = t.rowid " +
 			"INNER JOIN taxis tx ON c.taxi_id = tx.rowid " +
-			"LEFT JOIN users u ON c.registrada_por = u.rowid and u.eliminado='0' " +
 			'WHERE c.eliminado = "0" and fecha_ini like "' + fechita + '%" ' +
 			"order by c.rowid desc";
 

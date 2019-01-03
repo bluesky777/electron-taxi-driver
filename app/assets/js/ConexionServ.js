@@ -56,7 +56,7 @@ angular.module('TaxisFast')
                 "lugar_fin varchar(100) DEFAULT NULL,"+
                 "fecha_fin date DEFAULT NULL," +
                 "estado varchar(100) NOT NULL collate nocase,"+
-                "registrada_por integer(100) DEFAULT NULL collate nocase,"+
+                "registrada_por varchar(200) DEFAULT NULL collate nocase,"+
                 "modificado varchar(100)  DEFAULT 0,"+
                 "eliminado integer  DEFAULT 0)";
               

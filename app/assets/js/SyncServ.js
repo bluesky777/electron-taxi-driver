@@ -13,10 +13,11 @@ angular.module('TaxisFast')
             datos       = {};
             promesas    = [];
             
-            consulta = 'SELECT *, rowid from users WHERE eliminado = "1" or modificado ="1" or id is null and id !=1'
+            consulta = 'SELECT *, rowid from users WHERE eliminado = "1" or modificado="1" or id is null '
             prom = ConexionServ.query(consulta, []);
             prom.then(function(result){
                 datos.usuarios = result;
+                console.log(result);
             }, function(tx){
                 console.log('error', tx);
             })
