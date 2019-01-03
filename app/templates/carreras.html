@@ -238,7 +238,7 @@
 					</div>
 					
 					<div>
-						<input type="text" ng-model="buscando" placeholder="Buscar..." class="form-control col-sm-6" style="margin-bottom: 20px; font-size: 14px;">
+						<input type="text" ng-model="buscando" placeholder="Buscar..." class="form-control col-sm-6 no-print" style="margin-bottom: 20px; font-size: 14px;">
 					</div>
 					
 					<table class="table tb-carreras table-condensed">
@@ -247,7 +247,11 @@
 								<th scope="col">#</th>
 								<th scope="col">Taxi</th>
 								<th scope="col">Taxista</th>
-								<th scope="col">Zona</th>
+								<th scope="col">Z</th>
+								<th scope="col">Celular</th>
+								<th scope="col">
+									<span uib-tooltip="Registrado por">Por</span>
+								</th>
 								<th scope="col">Llamada</th>
 								<th scope="col">Dirección</th>
 								<!--<th scope="col">Lugar Fin</th>-->
@@ -260,10 +264,23 @@
 						<tbody>
 							<tr ng-repeat="carrera in carreras | filter:buscando" class="manito" ng-class="{'fondo-seleccionado': carrera.seleccionada}">
 								<td scope="row">{{carrera.rowid}}</td>
-								<td ng-click="modificarcarrera(carrera)">{{carrera.numero}}</td>
-								<td ng-click="modificarcarrera(carrera)">{{carrera.nombres}} {{carrera.apellidos}}</td>
-								<td ng-click="modificarcarrera(carrera)">{{carrera.zona}}</td>
-								<td ng-click="modificarcarrera(carrera)">{{carrera.fecha_ini | date:'yyyy-MM-dd hh:mm a' }}</td>
+								<td ng-click="modificarcarrera(carrera)">
+									{{carrera.numero}}
+								</td>
+								<td ng-click="modificarcarrera(carrera)">
+									{{carrera.nombres}} {{carrera.apellidos}}
+								</td>
+								<td ng-click="modificarcarrera(carrera)" style="font-size: 10pt;">
+									{{carrera.zona}}
+								</td>
+								<td ng-click="modificarcarrera(carrera)" style="font-size: 10pt;">
+									{{carrera.cell_llamado}}
+								</td>
+								<td ng-click="modificarcarrera(carrera)" style="font-size: 10pt;">
+									{{::carrera.nombres_reg}} {{::carrera.apellidos_reg}}
+								</td>
+								<td ng-click="modificarcarrera(carrera)">
+									{{carrera.fecha_ini | date:'yyyy-MM-dd hh:mm a' }}</td>
 								<td ng-click="modificarcarrera(carrera)"> {{carrera.lugar_inicio}}</td>
 								<!--<td ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</td>-->
 								<td ng-click="modificarcarrera(carrera, true)">

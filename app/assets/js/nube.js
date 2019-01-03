@@ -78,9 +78,9 @@ app.controller('nubeCtrl', function($scope, $http, $filter, ConexionServ, toastr
 				} 
 			
 			for (var i = 0; i < carreras.length; i++) {
-				consulta = 'INSERT INTO carreras (id, rowid, taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, lugar_fin, fecha_fin, estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-				ConexionServ.query(consulta, [carreras[i].id, carreras[i].id, carreras[i].taxi_id, carreras[i].taxista_id, carreras[i].zona, carreras[i].fecha_ini, carreras[i].lugar_ini, carreras[i].lugar_fin, carreras[i].fecha_fin, carreras[i].estado]).then(function(result){
-					console.log('se guardo la carrera papi', result);
+				consulta = 'INSERT INTO carreras (id, rowid, taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, cell_llamado, lugar_fin, fecha_fin, estado, registrada_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+				ConexionServ.query(consulta, [carreras[i].id, carreras[i].id, carreras[i].taxi_id, carreras[i].taxista_id, carreras[i].zona, carreras[i].fecha_ini, carreras[i].lugar_ini, carreras[i].cell_llamado, carreras[i].lugar_fin, carreras[i].fecha_fin, carreras[i].estado, carreras[i].registrada_por]).then(function(result){
+					console.log('se guardo la carrera', result);
 				
 					if ($scope.progreso_barra >= 100) {
 

@@ -19,8 +19,10 @@ app.controller("taxisCtrl", function(
 
   
   $scope.CREARTAXI = function(taxi_nuevo) {
-	  
-	console.log(taxi_nuevo);
+    
+    if (!taxi_nuevo.propietario) {
+      taxi_nuevo.propietario = '';
+    }
 
     consulta = "INSERT INTO taxis (modelo, numero, placa, taxista_id, propietario, Soat, Seguro) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	

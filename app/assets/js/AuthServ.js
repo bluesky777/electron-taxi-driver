@@ -45,7 +45,7 @@ angular.module('TaxisFast')
                 if (result.length > 0) {
                     // LOGUEAMOS EN LA DB LOCAL OFFLINE
                     
-                    consulta = 'SELECT u.rowid, u.id, u.nombres, u.apellidos, u.usuario, u.sexo, u.celular, u.documento, u.tipo, u.email '+
+                    consulta = 'SELECT u.rowid, u.id, u.nombres, u.apellidos, u.usuario, u.sexo, u.celular, u.documento, u.tipo, u.email, u.fecha_nac '+
                         'FROM users u '+
                         'WHERE  u.usuario=? and u.password=? ' ;
 
@@ -132,7 +132,7 @@ angular.module('TaxisFast')
             var defered = $q.defer();
 
 
-            consulta = 'SELECT u.rowid, u.id, u.nombres, u.apellidos, u.usuario, u.sexo, u.celular, u.documento, u.tipo '+
+            consulta = 'SELECT u.rowid, u.id, u.nombres, u.apellidos, u.usuario, u.sexo, u.celular, u.documento, u.tipo, u.fecha_nac '+
                         'FROM users u '+
                         'WHERE  u.rowid=? ' ;
             

@@ -30,6 +30,7 @@ angular.module('TaxisFast')
             prom = ConexionServ.query(consulta, []);
             prom.then(function(result){
                 datos.carreras = result;
+                console.log(datos.carreras);
             }, function(tx){
                 console.log('error', tx);
             });
@@ -117,7 +118,7 @@ angular.module('TaxisFast')
                 });
                 consulta = 'UPDATE users SET eliminado ="0", modificado="0"'
                 prom = ConexionServ.query(consulta, []).then(function(result){
-                    console.log('se elimino el users en la nube', result);
+                    console.log('se eliminó el users en la nube', result);
                 }, function(tx){
                     console.log('error', tx);
                 });
@@ -129,7 +130,7 @@ angular.module('TaxisFast')
                     
                     consulta = 'INSERT INTO taxis ( id, rowid, modelo, numero, placa, taxista_id, propietario, soat, seguro) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)'
                     prom = ConexionServ.query(consulta, [taxi.id, taxi.id, taxi.modelo, taxi.numero, taxi.placa, taxi.taxista_id, taxi.propietario, taxi.soat, taxi.seguro]).then(function(result){
-                        console.log('se cargo taxis', result);
+                        console.log('se insertó taxis', result);
                     }, function(tx){
                         console.log('error', tx);
                     });
@@ -156,9 +157,9 @@ angular.module('TaxisFast')
                         
                     carrera =  carreras[i];
                 
-                    consulta = 'INSERT INTO carreras (id, rowid, taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, lugar_fin, fecha_fin, estado, registrada_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-                    prom = ConexionServ.query(consulta, [carrera.id, carrera.id, carrera.taxi_id, carrera.taxista_id, carrera.zona, carrera.fecha_ini, carrera.lugar_ini, carrera.lugar_fin, carrera.fecha_fin, carrera.estado, carrera.registrada_por]).then(function(result){
-                        console.log('se guardo la carrera papi', result);
+                    consulta = 'INSERT INTO carreras (id, rowid, taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, cell_llamado, lugar_fin, fecha_fin, estado, registrada_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+                    prom = ConexionServ.query(consulta, [carrera.id, carrera.id, carrera.taxi_id, carrera.taxista_id, carrera.zona, carrera.fecha_ini, carrera.cell_llamado, carrera.lugar_ini, carrera.lugar_fin, carrera.fecha_fin, carrera.estado, carrera.registrada_por]).then(function(result){
+                        console.log('se guardo la carrera', result);
                     }, function(tx){
                         console.log('error', tx);
                     });

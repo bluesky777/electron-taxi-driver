@@ -119,6 +119,11 @@
           <strong class="card-title">TABLA TAXI</strong>
         </div>
         <div class="card-body">
+          
+					<div>
+            <input type="text" ng-model="buscando" placeholder="Buscar..." class="form-control col-sm-6 no-print" style="margin-bottom: 20px; font-size: 14px;">
+          </div>
+            
           <table class="table">
             <thead class="thead-dark">
               <tr>
@@ -134,7 +139,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="taxi in taxis">
+              <tr ng-repeat="taxi in taxis | filter:buscando">
                 <th scope="row">{{ taxi.rowid }}</th>
                 <td>{{ taxi.modelo }}</td>
                 <td>{{ taxi.numero }}</td>

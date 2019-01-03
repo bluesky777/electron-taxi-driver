@@ -1,7 +1,7 @@
 
 var app = angular.module('TaxisFast');
 
-app.controller('UsuariosCtrl', function($scope, $http, $filter, ConexionServ, $location, $anchorScroll,toastr, $uibModal){
+app.controller('UsuariosCtrl', function($scope, $http, $timeout, ConexionServ, $location, $anchorScroll,toastr, $uibModal){
 
 	ConexionServ.createTables();
 
@@ -158,9 +158,20 @@ app.controller('UsuariosCtrl', function($scope, $http, $filter, ConexionServ, $l
 			usuario.fecha_nac = new Date(usuario.fecha_nac);
 		}
 		
+		
+		if (taxista.sexo == 'M') {
+			$scope.caja_genero1(taxista.sexo);
+		}else{
+			$scope.caja_genero2(taxista.sexo);
+		}
+		
 		$scope.usuario_Editar = usuario;
-		$location.hash('id-editar-usuario');
-		$anchorScroll();
+		
+		$timeout(function(){
+			$location.hash('id-editar-usuario');
+			$anchorScroll();
+		}, 100)
+		
 	
 	}
     

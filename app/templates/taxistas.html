@@ -99,7 +99,7 @@
 
                 <div class="content mt-3">
 
-          <button   class="btn btn-primary" ng-show="ocultarboton" ng-click="mostrartabla()">Crear Taxista</button>
+          <button   class="btn btn-primary btn-lg" ng-show="ocultarboton" ng-click="mostrartabla()">Crear Taxista</button>
 
 <hr>
                     <div class="card">
@@ -107,6 +107,10 @@
                             <strong class="card-title">Tabla Taxistas</strong>
                         </div>
                         <div class="card-body">
+                            <div>
+                              <input type="text" ng-model="buscando" placeholder="Buscar..." class="form-control col-sm-6 no-print" style="margin-bottom: 20px; font-size: 14px;">
+                            </div>
+                            
                             <table class="table">
                               <thead class="thead-dark">
                                 <tr>
@@ -124,7 +128,7 @@
                                 </tr>
                               </thead >
                               <tbody>
-                                <tr ng-repeat="taxista in taxistas">
+                                <tr ng-repeat="taxista in taxistas | filter:buscando">
                                   <th scope="row">{{taxista.rowid}}</th>
                                   <td>{{taxista.nombres}}</td>
                                   <td>{{taxista.apellidos}}</td>
@@ -171,10 +175,10 @@
                       <div class="row">
                            <div class="col-sm-2">Sexo: </div> 
                           <div class="col-md-9 col-form-label">
-                            <div name="sa" class="form-check form-check-inline mr-1 " ng-model="taxista_Editar.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" >
+                            <div name="sa" class="form-check form-check-inline mr-1 " ng-model="taxista_Editar.sexo"  value="'M'" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" >
                               <img src="images/male1.png" class="img-genero" style="width: 100px;" for="inline-masculino-crear">
                             </div>
-                            <div name="sa" class="form-check form-check-inline mr-1" ng-model="taxista_Editar.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }"   ng-click="caja_genero2('F')">
+                            <div name="sa" class="form-check form-check-inline mr-1" ng-model="taxista_Editar.sexo" value="'F'" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }"   ng-click="caja_genero2('F')">
                                <img src="images/female1.png" class="img-genero" style="width: 100px;" for="inline-femenino-crear">
                              
                             </div>

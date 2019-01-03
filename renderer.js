@@ -50,31 +50,36 @@ var db              = require(path.join(__dirname, '/app/conexion/connWeb'));
 
 // Para las fechas
 window.fixDate = function(fec, con_hora){
-	dia   = fec.getDate();
-	mes   = (fec.getMonth() + 1 );
-	year  = fec.getFullYear();
-  
-	if (dia < 10) {
-	  dia = '0' + dia;
-	}
-  
-	if (mes < 10) {
-	  mes = '0' + mes;
-	}
-  
-	fecha   = '' + year + '/' + mes  + '/' + dia;
+	try {
+		dia   = fec.getDate();
+		mes   = (fec.getMonth() + 1 );
+		year  = fec.getFullYear();
 	
-	if (con_hora){
-		hora 	= fec.getHours();
-		if (hora<10) { hora = '0' + hora; };
-		min 	= fec.getMinutes();
-		if (min<10) { min = '0' + min; };
-		sec 	= fec.getSeconds();
-		if (sec<10) { sec = '0' + sec; };
-		fecha 	= fecha + ' ' + hora + ':' + min + ':' + sec
+		if (dia < 10) {
+		dia = '0' + dia;
+		}
+	
+		if (mes < 10) {
+		mes = '0' + mes;
+		}
+	
+		fecha   = '' + year + '/' + mes  + '/' + dia;
+		
+		if (con_hora){
+			hora 	= fec.getHours();
+			if (hora<10) { hora = '0' + hora; };
+			min 	= fec.getMinutes();
+			if (min<10) { min = '0' + min; };
+			sec 	= fec.getSeconds();
+			if (sec<10) { sec = '0' + sec; };
+			fecha 	= fecha + ' ' + hora + ':' + min + ':' + sec
+		}
+		
+		return fecha;
+	} catch (error) {
+		return fec;
 	}
 	
-	return fecha;
 }
 window.getRandomInt = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;

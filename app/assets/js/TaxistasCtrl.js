@@ -1,16 +1,15 @@
 var app = angular.module('TaxisFast');
 
-app.controller('TaxistasCtrl', function($scope, $http, $filter, ConexionServ, $location, $anchorScroll, $uibModal){
+app.controller('TaxistasCtrl', function($scope, $http, $timeout, ConexionServ, $location, $anchorScroll, $uibModal){
 
-ConexionServ.createTables();
 
 	$scope.ocultarboton = true;
-    $scope.color_seleccion1 = false;
-    $scope.color_seleccion2 = false;
+	$scope.color_seleccion1 = false;
+	$scope.color_seleccion2 = false;
 
 
-$scope.ver = false;
-$scope.ver2 = false;
+	$scope.ver = false;
+	$scope.ver2 = false;
 
 	$scope.caja_genero1 = function(opcion){
 		$scope.color_seleccion1 = true;
@@ -101,7 +100,6 @@ $scope.ver2 = false;
 					$scope.taxistas[i].fecha_nac = new Date($scope.taxistas[i].fecha_nac);
 				}				
 			}
-			console.log('se subio el taxista', result);
 
 		}, function(tx){
 			console.log('error', tx);
@@ -150,9 +148,20 @@ $scope.traer_datos()
 			taxista.fecha_nac = new Date(taxista.fecha_nac);
 		}
 		
+		if (taxista.sexo == 'M') {
+			$scope.caja_genero1(taxista.sexo);
+		}else{
+			$scope.caja_genero2(taxista.sexo);
+		}
+		
+		
 		$scope.taxista_Editar = taxista;
-   		$location.hash('id-editar-taxista');
-		$anchorScroll();
+
+		$timeout(function(){
+			$location.hash('id-editar-taxista');
+			$anchorScroll();
+		}, 100)
+   		
 	
 	}
     
@@ -174,24 +183,24 @@ $scope.traer_datos()
 
 		if (taxista_Editar.id == null) {
 					consulta = 'UPDATE taxistas SET  nombres=?, apellidos=?, sexo=?, documento=?, celular=?, fecha_nac=?, usuario=?, password=? where rowid=? '
-		ConexionServ.query(consulta, [taxista_Editar.nombres, taxista_Editar.apellidos, $scope.opcion, taxista_Editar.documento, taxista_Editar.celular, fecha_nac, taxista_Editar.usuario, taxista_Editar.password, taxista_Editar.rowid]).then(function(result){
-			console.log('se cargo el taxista en la compu', result);
-			$scope.traer_datos()
-		}, function(tx){
-			console.log('error', tx);
-		});
-	} else	{
-				consulta = 'UPDATE taxistas SET  nombres=?, apellidos=?, sexo=?, documento=?, celular=?, fecha_nac=?, usuario=?, password=?, modificado=? where rowid=? '
-		ConexionServ.query(consulta, [taxista_Editar.nombres, taxista_Editar.apellidos, $scope.opcion, taxista_Editar.documento, taxista_Editar.celular, fecha_nac, taxista_Editar.usuario, taxista_Editar.password, "1", taxista_Editar.rowid]).then(function(result){
-			console.log('se cargo el taxista en la nube', result);
-			$scope.traer_datos()
-		}, function(tx){
-			console.log('error', tx);
-		});
-	}
+			ConexionServ.query(consulta, [taxista_Editar.nombres, taxista_Editar.apellidos, $scope.opcion, taxista_Editar.documento, taxista_Editar.celular, fecha_nac, taxista_Editar.usuario, taxista_Editar.password, taxista_Editar.rowid]).then(function(result){
+				console.log('se cargo el taxista en la compu', result);
+				$scope.traer_datos()
+			}, function(tx){
+				console.log('error', tx);
+			});
+		} else	{
+					consulta = 'UPDATE taxistas SET  nombres=?, apellidos=?, sexo=?, documento=?, celular=?, fecha_nac=?, usuario=?, password=?, modificado=? where rowid=? '
+			ConexionServ.query(consulta, [taxista_Editar.nombres, taxista_Editar.apellidos, $scope.opcion, taxista_Editar.documento, taxista_Editar.celular, fecha_nac, taxista_Editar.usuario, taxista_Editar.password, "1", taxista_Editar.rowid]).then(function(result){
+				console.log('se cargo el taxista en la nube', result);
+				$scope.traer_datos()
+			}, function(tx){
+				console.log('error', tx);
+			});
+		}
 
 	
-$scope.ver = false;
+		$scope.ver = false;
 
 
 	}	

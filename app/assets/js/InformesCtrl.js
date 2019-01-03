@@ -1,6 +1,6 @@
 var app = angular.module('TaxisFast');
 
-app.controller('InformesCtrl', function($scope, $http, $filter, ConexionServ, AuthServ, $state){
+app.controller('InformesCtrl', function($scope, $http, toastr, ConexionServ, AuthServ, $state){
 
 ConexionServ.createTables();
 
@@ -69,9 +69,6 @@ $scope.vertablacarreras = false;
 	consulta = 'SELECT *, rowid from users where eliminado = 0'
 	ConexionServ.query(consulta, []).then(function(result){
 		$scope.usuarios = result;
-	
-		console.log('se trajeron los usuarios', result);
-
 	}, function(tx){
 		console.log('error', tx);
 	})
@@ -80,9 +77,6 @@ $scope.vertablacarreras = false;
 	consulta = 'SELECT *, rowid from taxistas where eliminado = 0'
 	ConexionServ.query(consulta, []).then(function(result){
 		$scope.taxistas = result;
-	
-		console.log('se trajeron los taxistas', result);
-
 	}, function(tx){
 		console.log('error', tx);
 	})
@@ -91,8 +85,6 @@ $scope.vertablacarreras = false;
 	consulta = 'SELECT *, rowid from taxis where eliminado = 0'
 	ConexionServ.query(consulta, []).then(function(result){
 		$scope.taxis = result;
-	
-		console.log('se trajeron los taxis', result);
 
 	}, function(tx){
 		console.log('error', tx);
@@ -100,26 +92,28 @@ $scope.vertablacarreras = false;
 
 	
 
-$scope.traer_datos4 = function(informe){
+	$scope.traer_datos4 = function(informe){
+		
+		if (informe.fecha_ini) {
+			fecha_inicios = window.fixDate(informe.fecha_ini);
+		}else{
+			toastr.warning('Debe seleccionar fecha.');
+			return;
+		}
 
 
-
-	fecha_inicios = informe.fecha_ini.getMonth() ;
-
-
-		consulta = 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero from carreras c ' + 
+		consulta = 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero, u.nombres as nombres_reg, u.apellidos as apellidos_reg from carreras c ' + 
 				'INNER JOIN taxistas t ON c.taxista_id = t.rowid ' + 
 				'INNER JOIN taxis tx ON c.taxi_id = tx.rowid ' +
-				'where c.fecha_ini = ?';
-
-			ConexionServ.query(consulta, [fecha_inicios]).then(function(result){
+				"LEFT JOIN users u ON c.registrada_por = u.rowid and u.eliminado='0' " +
+				'where c.fecha_ini like "'+ fecha_inicios + '%" ';
+		console.log(consulta, fecha_inicios);
+		ConexionServ.query(consulta, []).then(function(result){
 			$scope.carreras = result;
-	
-			console.log('se trajeron las carreras',result);
 
 		}, function(tx){
 			console.log('error', tx);
-
+			toastr.error('No se puedo traer las carreras');
 		})
 
 

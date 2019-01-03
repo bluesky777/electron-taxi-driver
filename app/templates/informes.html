@@ -45,7 +45,7 @@
      
 
 
-      <DIV class="card-body">
+      <DIV class="card-body"  style="overflow: unset;">
                   <div ng-show="ver"  class="card">
                         <div class="card-header">
                             <strong class="card-title">Tabla Usuario</strong>
@@ -134,7 +134,7 @@
                        <div class="card-header">
                             <strong class="card-title">Carreras</strong>
                         </div>
-                      <div class="card-body">
+                      <div class="card-body" style="overflow: unset;">
                           <div class="row">
                               <div class="col-sm-3">Filtrar por:</div>  
                               <div class="btn-group">                        
@@ -244,10 +244,13 @@
                                   <th scope="col">Taxi</th>
                                   <th scope="col">Taxista</th>
                                   <th scope="col">Zona </th>
-                                  <th scope="col">Fecha Ini</th>
-                                  <th scope="col">Lugar Ini</th>
-                                  <th scope="col">Lugar Fin</th>
-                                  <th scope="col">Fecha Fin</th>
+                                  <th scope="col">Celular</th>
+                                  <th scope="col">
+                                    <span uib-tooltip="Registrado por">Por</span>
+                                  </th>
+                                  <th scope="col">Llamada</th>
+                                  <th scope="col">Dirección</th>
+                                  <th scope="col">Encuentro</th>
                                   <th scope="col">Estado</th>
                             
                                  
@@ -258,10 +261,16 @@
                                   <th scope="row">{{carrera.rowid}}</th>
                                   <td  >{{carrera.numero}}</td>
                                   <td  >{{carrera.nombres}} {{carrera.apellidos}}</td>
-                                  <td  >{{carrera.zona}}</td>         
-                                  <td  >{{carrera.fecha_ini | date:'yyyy-MM-dd HH:mm' }}</td>
+                                  <td  >{{carrera.zona}}</td>
+                                  <td ng-click="modificarcarrera(carrera)" style="font-size: 10pt;">
+                                    {{carrera.cell_llamado}}
+                                  </td>
+                                  <td ng-click="modificarcarrera(carrera)" style="font-size: 10pt;">
+                                    {{::carrera.nombres_reg}} {{::carrera.apellidos_reg}}
+                                  </td>
+                                  <td ng-click="modificarcarrera(carrera)">
+                                    {{carrera.fecha_ini | date:'yyyy-MM-dd hh:mm a' }}</td>
                                   <TD > {{carrera.lugar_inicio}}</TD>
-                                   <TD >{{carrera.lugar_fin}}</TD>
                                   <TD >{{carrera.fecha_fin | date:'yyyy-MM-dd HH:mm'}}</TD>
                                   <TD >{{carrera.estado}}</TD>
                              

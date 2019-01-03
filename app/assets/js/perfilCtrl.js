@@ -2,24 +2,33 @@ var app = angular.module('TaxisFast');
 
 app.controller('perfilCtrl', function($scope, $http, $filter, ConexionServ, AuthServ,  $state, USER, toastr){
 
-$scope.USER = USER;
+	$scope.USER = USER;
 
  
-   $scope.usu = USER;
+	$scope.usu = USER;
+   
+	if ($scope.usu.fecha_nac) {
+		$scope.usu.fecha_nac = new Date($scope.usu.fecha_nac);
+	}
+	
 
-   $scope.passwords = {
-   		antiguo: '',
-   		nuevo: '',
-   		nuevo2: ''
-   };
+	$scope.passwords = {
+		antiguo: '',
+		nuevo: '',
+		nuevo2: ''
+	};
 
 
 
 	$scope.GUARDARUSUARIO = function(usu){
-			fecha_nac = '' + usu.fecha_nac.getFullYear() + '/' + (usu.fecha_nac.getMonth() + 1) + '/' + usu.fecha_nac.getDate();
+		if (!usu.fecha_nac) {
+			toastr.warning('Ingrese fecha de nacimiento');
+			return;
+		}
+		fecha_nac = window.fixDate($scope.usu.fecha_nac);
+		
 		consulta = 'UPDATE users SET  nombres=?, apellidos=?, sexo=?, documento=?, celular=?, fecha_nac=?, modificado=? where rowid=?'
-		ConexionServ.query(consulta, [usu.nombres,usu.apellidos, usu.sexo, usu.documento, usu.celular,fecha_nac, "1", usu.rowid]).then(function(result){
-			console.log('se cargo el usuario', result);
+		ConexionServ.query(consulta, [usu.nombres,usu.apellidos, usu.sexo, usu.documento, usu.celular, fecha_nac, "1", usu.rowid]).then(function(result){
 			AuthServ.update_user_storage(usu);
 			toastr.success('Guardado con éxito', 'Guardado');
 		}, function(tx){
