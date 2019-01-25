@@ -33,6 +33,12 @@ app.controller("CarrerasCtrl", function(
 		window.print();
 	};
 
+	$scope.refreshHora = function(campo, campo2) {
+		fecha = new Date();
+		$scope.carrera_nuevo[campo] = fecha;
+		$scope.carrera_nuevo[campo2] = fecha;
+	};
+
 	$scope.carrera_Editar = {
 		zona: "Z1",
 		fecha_ini: fecha,
@@ -48,7 +54,7 @@ app.controller("CarrerasCtrl", function(
 	$scope.ver2 = true;
 	$scope.vercarreras = false;
 
-	consulta = "SELECT *, rowid FROM taxistas";
+	consulta = "SELECT *, rowid FROM taxistas WHERE eliminado ='0'";
 	ConexionServ.query(consulta, []).then(
 		function(result) {
 			$scope.taxistas = result;
@@ -58,7 +64,7 @@ app.controller("CarrerasCtrl", function(
 		}
 	);
 
-	consulta = "SELECT *, rowid  FROM taxis";
+	consulta = "SELECT *, rowid  FROM taxis WHERE eliminado ='0'";
 	ConexionServ.query(consulta, []).then(
 		function(result) {
 			$scope.taxis = result;
@@ -70,7 +76,7 @@ app.controller("CarrerasCtrl", function(
 
 	$scope.select_taxista = function(carrera_nuevo) {
 
-		consulta = "SELECT *, rowid FROM taxistas WHERE rowid =?";
+		consulta = "SELECT *, rowid FROM taxistas WHERE rowid =? and eliminado='0'";
 		ConexionServ.query(consulta, [carrera_nuevo.taxi.taxista_id]).then(function(result) {
 				if (result.length > 0) {
 					carrera_nuevo.taxista = result[0];

@@ -102,10 +102,9 @@ $scope.vertablacarreras = false;
 		}
 
 
-		consulta = 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero, u.nombres as nombres_reg, u.apellidos as apellidos_reg from carreras c ' + 
+		consulta = 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero from carreras c ' + 
 				'INNER JOIN taxistas t ON c.taxista_id = t.rowid ' + 
 				'INNER JOIN taxis tx ON c.taxi_id = tx.rowid ' +
-				"LEFT JOIN users u ON c.registrada_por = u.rowid and u.eliminado='0' " +
 				'where c.fecha_ini like "'+ fecha_inicios + '%" ';
 		console.log(consulta, fecha_inicios);
 		ConexionServ.query(consulta, []).then(function(result){

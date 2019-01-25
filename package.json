@@ -1,6 +1,6 @@
 {
   "name": "radio-taxi",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Aplicación para control de los Taxis en RadioTaxi",
   "main": "main.js",
   "scripts": {

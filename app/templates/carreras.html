@@ -115,6 +115,10 @@
 							 
 							<div uib-timepicker ng-model="carrera_nuevo.hora_ini"" ng-change=" 1" hour-step="1" minute-step="1"
 							 show-meridian="true" style="margin-left: 10px"></div>
+							
+							<button class="btn btn-default btn-lg" type="button" ng-click="refreshHora('hora_ini', 'fecha_ini')" style="height: 30px; margin-top: 30px;">
+								<i class="fa fa-refresh"></i>
+							</button> 
 
 
 						</div>
@@ -133,6 +137,11 @@
 						
 							<div uib-timepicker ng-model="carrera_nuevo.hora_fin" ng-change=" 1" hour-step="1" minute-step="1"
 								show-meridian="true" style="margin-left: 10px"></div>
+								
+								
+							<button class="btn btn-default btn-lg" type="button" ng-click="refreshHora('hora_fin', 'fecha_fin')" style="height: 30px; margin-top: 30px;">
+								<i class="fa fa-refresh"></i>
+							</button> 
 						</div>
 
 						<div class="row">
@@ -216,6 +225,10 @@
 							<option value="2019">2019</option>
 							<option value="2020">2020</option>
 							<option value="2021">2021</option>
+							<option value="2022">2022</option>
+							<option value="2023">2023</option>
+							<option value="2024">2024</option>
+							<option value="2025">2025</option>
 						</select>
 						
 						<select name="select_month" ng-model="dato.select_month" ng-change="traer_datos(dato)">
@@ -415,6 +428,7 @@
 									style="margin-top: 27px">
 								<div uib-timepicker ng-model="carrera_Editar.fecha_ini"" ng-change=" 1" hour-step="1" minute-step="1"
 									show-meridian="true" style="margin-left: 10px"></div>
+								
 
 
 							</div>
