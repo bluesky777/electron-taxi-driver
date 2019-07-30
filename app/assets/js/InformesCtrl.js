@@ -123,28 +123,24 @@ $scope.vertablacarreras = false;
 
 $scope.traer_datos = function(informe){
 
-fecha_inicio = window.fixDate(informe.fecha_ini);
+	fecha_inicio = window.fixDate(informe.fecha_ini);
 
 	consulta = 'SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero, SUBSTR(c.fecha_ini, 0, 11) as fecha_sub from carreras c ' + 
 				'INNER JOIN taxistas t ON c.taxista_id = t.rowid ' + 
 				'INNER JOIN taxis tx ON c.taxi_id = tx.rowid ' +
 				'where SUBSTR(c.fecha_ini, 0, 11) = ?';
-			ConexionServ.query(consulta, [fecha_inicio]).then(function(result){
-			$scope.carreras = result;
+	ConexionServ.query(consulta, [fecha_inicio]).then(function(result){
+		$scope.carreras = result;
 	
-			console.log('se trajeron las carreras',result);
+		console.log('se trajeron las carreras',result);
 
-		}, function(tx){
-			console.log('error', tx);
+	}, function(tx){
+		console.log('error', tx);
+	})
 
-		})
+	$scope.vertablacarreras = !$scope.vertablacarreras;	
+}
 
-
-
-		$scope.vertablacarreras = !$scope.vertablacarreras;
-
-	
-	}
 
 $scope.traer_datos2 = function(informe){
 

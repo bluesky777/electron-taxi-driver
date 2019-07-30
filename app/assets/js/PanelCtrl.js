@@ -44,11 +44,11 @@ window.fixDate = function(fec, con_hora){
 		year  = fec.getFullYear();
 	
 		if (dia < 10) {
-		dia = '0' + dia;
+			dia = '0' + dia;
 		}
 	
 		if (mes < 10) {
-		mes = '0' + mes;
+			mes = '0' + mes;
 		}
 	
 		fecha   = '' + year + '/' + mes  + '/' + dia;

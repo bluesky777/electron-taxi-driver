@@ -13,8 +13,6 @@ app.controller('LoginCtrl', function($scope, $http, $filter, ConexionServ, AuthS
 		}
         
         AuthServ.loguear(user).then(function(data){
-			console.log(data);
-			//toastr.clear()
 			if(data.to_sync){
 				$state.go('panel.nube');
 				toastr.info('Debes descargar los datos si no lo has hecho.', 'Descargar');

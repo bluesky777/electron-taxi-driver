@@ -11,7 +11,7 @@ app.controller('GPSCtrl', function($scope, $http, $filter, ConexionServ, AuthSer
 
 
     $scope.ubicacion = function(){
-    	
+    	return
 	    $http.put(rutaServidor.ruta + 'taxis/traer-posiciones', {taxi_id: $scope.data.taxi_selec.rowid}).then(function(r){
 	        $scope.posiciones 		= r.data.posiciones;
 	        posicion 				= $scope.posiciones[$scope.posiciones.length-1];

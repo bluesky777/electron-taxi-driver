@@ -219,7 +219,7 @@
 					<div style="margin-bottom: 20px" class="no-print">
 						<label for="">Traer datos de</label>
 						
-						<select name="select_year" ng-model="dato.select_year" ng-change="traer_datos(dato)">
+						<select name="select_year" ng-model="dato.select_year">
 							<option value="0">Cualquier año</option>
 							<option value="2018">2018</option>
 							<option value="2019">2019</option>
@@ -231,7 +231,7 @@
 							<option value="2025">2025</option>
 						</select>
 						
-						<select name="select_month" ng-model="dato.select_month" ng-change="traer_datos(dato)">
+						<select name="select_month" ng-model="dato.select_month"">
 							<option value="0">Cualquier mes</option>
 							<option value="01">Enero</option>
 							<option value="02">Febrero</option>
@@ -247,7 +247,9 @@
 							<option value="12">Diciembre</option>
 						</select>
 						
+						<input type="button" class="btn btn-info" value="Exportar a Excel" ng-click="exportar_excel(dato)">
 						<input type="button" class="btn btn-info" value="Buscar" ng-click="traer_datos(dato)">
+
 					</div>
 					
 					<div>

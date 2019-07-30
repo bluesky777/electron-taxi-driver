@@ -9,13 +9,16 @@ app.controller("CarrerasCtrl", function(
 	$location,
 	$anchorScroll,
 	$uibModal,
-	$timeout
+	$timeout,
+	$http,
+	rutaServidor
 ) {
 	ConexionServ.createTables();
 
 	fecha = new Date();
 	$scope.mostrando_mas_cell = false;
 
+	
 	$scope.carrera_nuevo = {
 		zona: "Z1",
 		fecha_ini: fecha,
@@ -29,7 +32,6 @@ app.controller("CarrerasCtrl", function(
 
 	$scope.imprimir = function() {
 		const { ipcRenderer } = require("electron");
-		console.log(ipcRenderer);
 		window.print();
 	};
 
@@ -53,6 +55,7 @@ app.controller("CarrerasCtrl", function(
 	$scope.ver = false;
 	$scope.ver2 = true;
 	$scope.vercarreras = false;
+	$scope.dato = { select_year: '' + (new Date().getFullYear()), select_month: 0 }
 
 	consulta = "SELECT *, rowid FROM taxistas WHERE eliminado ='0'";
 	ConexionServ.query(consulta, []).then(
@@ -156,6 +159,33 @@ app.controller("CarrerasCtrl", function(
 
 
 
+	$scope.exportar_excel = function(dato) {
+
+		if (parseInt(dato.select_month) == 0) {
+			toastr.warning('Seleccione el mes.');
+			return;
+		}
+
+		defaultFileName = 'Carreras ' + dato.select_month + '/' + dato.select_year + '.xls';
+		
+		$http.get(rutaServidor.ruta + 'taxis/exportar-carreras', {params: dato, responseType: "blob"} ).then( function(data){
+			type          = data.headers('Content-Type');
+			disposition   = data.headers('Content-Disposition');
+			if (disposition)
+				match = disposition.match(/.*filename=\"?([^;\"]+)\"?.*/);
+				if (match[1])
+					defaultFileName = match[1];
+
+			defaultFileName = defaultFileName.replace(/[<>:"\/\\|?*]+/g, '_')
+			blob = new Blob([data.data], { type: type });
+			window.saveAs(blob, defaultFileName);
+
+		}, function(r2){
+			console.log(r2);
+		});
+	}
+
+
 	$scope.traer_datos = function(dato) {
 		consulta 	= "";
 		fechita 	= window.fixDate(new Date());
@@ -195,19 +225,19 @@ app.controller("CarrerasCtrl", function(
 		});
 	
 	
-	consulta = 'SELECT distinct(cell_llamado) as cell_llamado FROM carreras WHERE eliminado = "0" and cell_llamado is not null';
-	ConexionServ.query(consulta, []).then(function(result) {
-		$scope.celulares = result;
-	}, function(tx) {
-		console.log("error celulares", tx);
-	});
-	
-	consulta = 'SELECT distinct(lugar_inicio) as direccion FROM carreras WHERE eliminado = "0" and lugar_inicio is not null and lugar_inicio!="" ';
-	ConexionServ.query(consulta, []).then(function(result) {
-		$scope.direcciones = result;
-	}, function(tx) {
-		console.log("error celulares", tx);
-	});
+		consulta = 'SELECT distinct(cell_llamado) as cell_llamado FROM carreras WHERE eliminado = "0" and cell_llamado is not null';
+		ConexionServ.query(consulta, []).then(function(result) {
+			$scope.celulares = result;
+		}, function(tx) {
+			console.log("error celulares", tx);
+		});
+		
+		consulta = 'SELECT distinct(lugar_inicio) as direccion FROM carreras WHERE eliminado = "0" and lugar_inicio is not null and lugar_inicio!="" ';
+		ConexionServ.query(consulta, []).then(function(result) {
+			$scope.direcciones = result;
+		}, function(tx) {
+			console.log("error celulares", tx);
+		});
 	};
 
 	$scope.traer_datos();
@@ -279,7 +309,7 @@ app.controller("CarrerasCtrl", function(
 		fechayhora_fin 		= fecha_fin + " " + hora_final;
 	
 		if (carrera_Editar.id == null) {
-			consulta = "UPDATE carreras SET  taxi_id=?, taxista_id=?, zona=?, fecha_ini=?, lugar_inicio=?, lugar_fin=?, fecha_fin=?, estado=? where rowid=? ";
+			consulta = "UPDATE carreras SET  taxi_id=?, taxista_id=?, zona=?, fecha_ini=?, lugar_inicio=?, lugar_fin=?, fecha_fin=?, estado=?, cell_llamado=? where rowid=? ";
 			ConexionServ.query(consulta, [
 				carrera_Editar.taxi.rowid,
 				carrera_Editar.taxista.rowid,
@@ -289,6 +319,7 @@ app.controller("CarrerasCtrl", function(
 				carrera_Editar.lugar_fin,
 				fechayhora_fin,
 				carrera_Editar.estado,
+				carrera_Editar.cell_llamado,
 				carrera_Editar.rowid
 			]).then(
 				function(result) {
