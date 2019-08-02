@@ -42,7 +42,7 @@ app.controller('nubeCtrl', function($scope, $http, $filter, ConexionServ, toastr
 					
 					consulta = 'INSERT INTO taxis ( id, rowid, numero, placa, taxista_id, propietario) VALUES( ?, ?, ?, ?, ?, ?)'
 					ConexionServ.query(consulta, [taxis[i].id, taxis[i].id, taxis[i].numero, taxis[i].placa, taxis[i].taxista_id, taxis[i].propietario]).then(function(result){
-						console.log('se cargo el taxi', result);
+						console.log('Se cargó el taxi');
 					
 						if ($scope.progreso_barra >= 100) {
 							$scope.progreso_barra = 100	
@@ -74,7 +74,7 @@ app.controller('nubeCtrl', function($scope, $http, $filter, ConexionServ, toastr
 				for (var i = 0; i < carreras.length; i++) {
 					consulta = 'INSERT INTO carreras (id, rowid, taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, cell_llamado, lugar_fin, fecha_fin, estado, registrada_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
 					ConexionServ.query(consulta, [carreras[i].id, carreras[i].id, carreras[i].taxi_id, carreras[i].taxista_id, carreras[i].zona, carreras[i].fecha_ini, carreras[i].lugar_ini, carreras[i].cell_llamado, carreras[i].lugar_fin, carreras[i].fecha_fin, carreras[i].estado, carreras[i].registrada_por]).then(function(result){
-						//console.log('se guardo la carrera', result);
+						console.log('Se guardó la carrera');
 					
 						if ($scope.progreso_barra >= 100) {
 							$scope.progreso_barra = 100	
@@ -93,7 +93,7 @@ app.controller('nubeCtrl', function($scope, $http, $filter, ConexionServ, toastr
 					
 						consulta = 'INSERT INTO users (id, rowid, nombres, apellidos, sexo, tipo, usuario, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?)'
 						ConexionServ.query(consulta, [usuarios[i].id, usuarios[i].id, usuarios[i].nombres, usuarios[i].apellidos, usuarios[i].sexo, usuarios[i].tipo, usuarios[i].usuario, usuarios[i].password]).then(function(result){
-							console.log('se guardo la carrera papi', result);
+							console.log('Se guardó el Usuario');
 							
 							if ($scope.progreso_barra >= 100) {
 								$scope.progreso_barra = 100	
