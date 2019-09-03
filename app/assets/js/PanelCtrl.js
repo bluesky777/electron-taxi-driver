@@ -54,14 +54,26 @@ window.fixDate = function(fec, con_hora){
 		fecha   = '' + year + '/' + mes  + '/' + dia;
 		
 		if (con_hora){
-			hora 	= fec.getHours();
-			if (hora<10) { hora = '0' + hora; };
-			min 	= fec.getMinutes();
-			if (min<10) { min = '0' + min; };
-			sec 	= fec.getSeconds();
-			if (sec<10) { sec = '0' + sec; };
-			fecha 	= fecha + ' ' + hora + ':' + min + ':' + sec
+			if (con_hora.getHours) {
+				hora 	= con_hora.getHours();
+				if (hora<10) { hora = '0' + hora; };
+				min 	= con_hora.getMinutes();
+				if (min<10) { min = '0' + min; };
+				sec 	= con_hora.getSeconds();
+				if (sec<10) { sec = '0' + sec; };
+				fecha 	= fecha + ' ' + hora + ':' + min + ':' + sec
+			}else{
+				hora 	= fec.getHours();
+				if (hora<10) { hora = '0' + hora; };
+				min 	= fec.getMinutes();
+				if (min<10) { min = '0' + min; };
+				sec 	= fec.getSeconds();
+				if (sec<10) { sec = '0' + sec; };
+				fecha 	= fecha + ' ' + hora + ':' + min + ':' + sec
+			}
+			
 		}
+		//console.log(fecha);
 
 		return fecha;
 	} catch (error) {

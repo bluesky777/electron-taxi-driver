@@ -113,25 +113,25 @@ app.controller("CarrerasCtrl", function(
 		}
 		
 
-		fecha_inicio 	= window.fixDate(carrera_nuevo.fecha_ini);
-		fecha_fin 		= window.fixDate(carrera_nuevo.fecha_fin);
-
+		fecha_inicio 	= window.fixDate(carrera_nuevo.fecha_ini, carrera_nuevo.hora_ini);
+		fecha_fin 		= window.fixDate(carrera_nuevo.fecha_fin, carrera_nuevo.hora_fin);
+		/*
 		hora_inicio 	= "" + carrera_nuevo.hora_ini.getHours() + ":" + carrera_nuevo.hora_ini.getMinutes() + ':00'; //+ (carrera_nuevo.hora_ini.getHours() >= 12 ? "PM" : "AM");
 		hora_final 		= "" + carrera_nuevo.hora_fin.getHours() + ":" + carrera_nuevo.hora_fin.getMinutes() + ':00'; //+ (carrera_nuevo.hora_fin.getHours() >= 12 ? "PM" : "AM");
 
 		fechayhora_inicio 	= fecha_inicio + " " + hora_inicio;
 		fechayhora_fin 		= fecha_fin + " " + hora_final;
-		
+		*/
 		consulta = "INSERT INTO carreras (taxi_id, taxista_id, zona, fecha_ini, lugar_inicio, cell_llamado, lugar_fin, fecha_fin, estado, registrada_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		ConexionServ.query(consulta, [
 			carrera_nuevo.taxi.rowid,
 			taxista_id,
 			carrera_nuevo.zona,
-			fechayhora_inicio,
+			fecha_inicio,
 			carrera_nuevo.lugar_inicio,
 			carrera_nuevo.cell_llamado,
 			carrera_nuevo.lugar_fin,
-			fechayhora_fin,
+			fecha_fin,
 			carrera_nuevo.estado,
 			usu.nombres + ' ' + usu.apellidos
 		]).then(function(result) {
@@ -299,25 +299,25 @@ app.controller("CarrerasCtrl", function(
 	
 	$scope.guardarcarrera = function(carrera_Editar) {
 		
-		fecha_inicio 	= window.fixDate(carrera_Editar.fecha_ini);
-		fecha_fin 		= window.fixDate(carrera_Editar.fecha_fin);
-
+		fecha_inicio 	= window.fixDate(carrera_Editar.fecha_ini, carrera_Editar.fecha_ini);
+		fecha_fin 		= window.fixDate(carrera_Editar.fecha_fin, carrera_Editar.fecha_fin);
+		/*
 		hora_inicio 	= "" + carrera_Editar.fecha_ini.getHours() + ":" + carrera_Editar.fecha_ini.getMinutes() + ':00'; //+ (carrera_nuevo.hora_ini.getHours() >= 12 ? "PM" : "AM");
 		hora_final 		= "" + carrera_Editar.fecha_fin.getHours() + ":" + carrera_Editar.fecha_fin.getMinutes() + ':00'; //+ (carrera_nuevo.hora_fin.getHours() >= 12 ? "PM" : "AM");
 
 		fechayhora_inicio 	= fecha_inicio + " " + hora_inicio;
 		fechayhora_fin 		= fecha_fin + " " + hora_final;
-	
+		*/
 		if (carrera_Editar.id == null) {
 			consulta = "UPDATE carreras SET  taxi_id=?, taxista_id=?, zona=?, fecha_ini=?, lugar_inicio=?, lugar_fin=?, fecha_fin=?, estado=?, cell_llamado=? where rowid=? ";
 			ConexionServ.query(consulta, [
 				carrera_Editar.taxi.rowid,
 				carrera_Editar.taxista.rowid,
 				carrera_Editar.zona,
-				fechayhora_inicio,
+				fecha_inicio,
 				carrera_Editar.lugar_inicio,
 				carrera_Editar.lugar_fin,
-				fechayhora_fin,
+				fecha_fin,
 				carrera_Editar.estado,
 				carrera_Editar.cell_llamado,
 				carrera_Editar.rowid
